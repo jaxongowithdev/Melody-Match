@@ -39,14 +39,14 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Mosslight',
+        title: 'Cadence Room',
         debugShowCheckedModeBanner: false,
         theme: VisualTheme.lightTheme,
         darkTheme: VisualTheme.darkTheme,
         themeMode: switch (_prefs?.theme) {
-          'light' => ThemeMode.light,
+          'dark' => ThemeMode.dark,
           'system' => ThemeMode.system,
-          _ => ThemeMode.dark
+          _ => ThemeMode.light
         },
         home: _prefs == null
             ? Scaffold(
@@ -57,7 +57,7 @@ class _UserScreenState extends State<UserScreen> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   const FieldMark(),
                   const SizedBox(height: 24),
-                  Text(_error ?? 'Opening your field guide…',
+                  Text(_error ?? 'Finding your rhythm…',
                       textAlign: TextAlign.center),
                   if (_error != null)
                     TextButton(
@@ -110,10 +110,10 @@ class _WelcomeViewState extends State<WelcomeView> {
         muted = VisualTheme.mutedOf(context),
         accent = VisualTheme.accentOf(context);
     final titles = [
-      'Find your\nsteady ground.',
-      'Choose a\nstarting point.',
-      'Give yourself\na little time.',
-      'Set your\npace today.'
+      'A better pause.\nA clearer next step.',
+      'What kind of\npause fits today?',
+      'Choose your\npractice length.',
+      'How much\nenergy is here?'
     ];
     return Scaffold(
         body: SafeArea(
@@ -122,33 +122,54 @@ class _WelcomeViewState extends State<WelcomeView> {
           padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
           child: Row(children: [
             Expanded(
-                child: Text('MOSSLIGHT / FIELD GUIDE',
+                child: Text('CADENCE ROOM',
                     style: VisualTheme.micro(11, color: accent))),
             Text('0${_page + 1} / 04',
                 style: VisualTheme.micro(11, color: muted)),
           ])),
-      LinearProgressIndicator(value: (_page + 1) / 4, minHeight: 2),
+      Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            for (var i = 0; i < 4; i++)
+              AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  width: i == _page ? 32 : 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                      color:
+                          i == _page ? accent : accent.withValues(alpha: .18),
+                      borderRadius: BorderRadius.circular(8)))
+          ])),
       Expanded(
           child: ListView(padding: const EdgeInsets.all(24), children: [
         if (_page == 0)
-          const Align(
-              alignment: Alignment.centerLeft, child: FieldMark(size: 170)),
+          Center(
+              child: Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                      color: VisualTheme.bayOf(context),
+                      borderRadius: BorderRadius.circular(40)),
+                  child: const FieldMark(size: 100))),
         const SizedBox(height: 16),
-        Text(titles[_page], style: VisualTheme.display(42, color: ink)),
+        Text(titles[_page],
+            textAlign: TextAlign.center,
+            style: VisualTheme.display(34, color: ink)),
         const SizedBox(height: 20),
         if (_page == 0) ...[
           Text(
-              'Learn to notice, move and breathe. A complete teacher, always with you — even without a signal.',
+              'Build small skills for the spaces between tasks. Movement, breathing and reflection, guided entirely on your device.',
               style: VisualTheme.body(17, color: muted)),
           const SizedBox(height: 24),
           const _IntroLine(
               icon: Icons.explore_outlined,
               title: 'Walk',
-              detail: 'Follow a guided practice, one clear step at a time.'),
+              detail: 'Your daily session, arranged as a simple sequence.'),
           const _IntroLine(
               icon: Icons.air,
               title: 'Four columns',
-              detail: 'Watch your breathing rhythm rise and settle.'),
+              detail: 'Four rising meters. One comfortable breathing rhythm.'),
           const _IntroLine(
               icon: Icons.lock_outline,
               title: 'Private by design',
@@ -161,16 +182,20 @@ class _WelcomeViewState extends State<WelcomeView> {
           for (final choice in [
             (
               'ease',
-              'Ground',
-              'Notice contact, balance and the present moment.'
+              'Reset',
+              'Make a clean transition between one task and the next.'
             ),
             (
               'stretch',
-              'Move',
-              'Explore a comfortable range without forcing it.'
+              'Loosen',
+              'Explore small, seated movements at your own pace.'
             ),
-            ('sit', 'Focus', 'Give your attention a simple place to return.'),
-            ('sleep', 'Rest', 'Put down the day with a quiet body practice.')
+            (
+              'sit',
+              'Attend',
+              'Practice choosing one thing and gently returning to it.'
+            ),
+            ('sleep', 'Unwind', 'Ease out of doing and into a quieter evening.')
           ])
             _Choice(
                 label: choice.$2,
@@ -183,17 +208,17 @@ class _WelcomeViewState extends State<WelcomeView> {
             _Choice(
                 label: '$m minutes',
                 detail: m == 8
-                    ? 'A compact field exercise.'
+                    ? 'A quick change of pace.'
                     : m == 12
-                        ? 'Time to explore and reflect.'
-                        : 'A longer trail into quiet.',
+                        ? 'A complete everyday practice.'
+                        : 'An extended pause with room to settle.',
                 selected: _minutes == m,
                 onTap: () => setState(() => _minutes = m)),
         if (_page == 3) ...[
           for (final choice in [
-            ('smooth', 'Gentle', 'Supported movement and short, simple cues.'),
-            ('even', 'Unhurried', 'A balance of movement and stillness.'),
-            ('rough', 'Curious', 'More time to explore sensations.')
+            ('smooth', 'Low', 'Keep the practice easy and supported.'),
+            ('even', 'Balanced', 'A little movement, a little quiet.'),
+            ('rough', 'Plenty', 'Stay longer with an attention exercise.')
           ])
             _Choice(
                 label: choice.$2,
@@ -276,14 +301,14 @@ class _Choice extends StatelessWidget {
           color: selected
               ? VisualTheme.accentOf(context).withValues(alpha: .12)
               : VisualTheme.bayOf(context),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(24),
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(24),
             child: Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(24),
                     border: Border.all(
                         color: selected
                             ? VisualTheme.accentOf(context)

@@ -17,7 +17,7 @@ class ShadeView extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
       children: [
         Text(
-          'REST / Close the field guide. Let support, ordinary memories and a body scan help you put down the day.',
+          'REST / Switch to a slower track. Two guided practices for ending the workday and settling into an unhurried evening.',
           style: VisualTheme.body(16, color: muted),
         ),
         const SizedBox(height: 14),

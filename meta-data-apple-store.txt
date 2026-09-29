@@ -1,28 +1,28 @@
 APP NAME (max 30)
-Mosslight
+Cadence Room
 
 SUBTITLE (max 30)
-Your offline field guide
+Practice your everyday pauses
 
 KEYWORDS (max 100)
-breath,movement,journal,offline,meditation,rest,focus,balance,body,awareness,mindfulness
+offline,breath,journal,focus,rest,movement,meditation,pause,mindfulness,relax,routine
 
 PROMOTIONAL TEXT (max 170)
-Find your steady ground. Learn with guided movement, rising-column breathing and a private field journal. Fully offline. No account. No cloud.
+Change the pace. Keep your centre. Guided sessions, rising-column breathing and a private recap journal — fully offline. No account. No cloud.
 
 DESCRIPTION
-Mosslight is a complete offline teacher for body awareness, gentle movement, attention and rest. A forest-green field guide with ten original practices, five quick skill lessons and three guided breathing rhythms. All teaching is included on your device. No account, no login, no cloud sync and no remote AI.
+Cadence Room is a complete offline teacher for the pauses between everyday tasks. Learn small skills for resetting attention, moving comfortably and winding down. Ten original guided sessions, five skill cards and three breathing rhythms are included on your device. No account, no login, no cloud sync and no remote AI.
 
-BEGIN YOUR WALK
-Choose Ground, Move, Focus or Rest, then set an 8-, 12- or 18-minute practice window and a comfortable pace. Walk selects a session from your preferences, time of day and recent practice. Follow clear written cues and a timer. Start, pause, advance to the next step and save how you feel when you finish.
+BUILD YOUR DAILY MIX
+Complete a short onboarding: choose Reset, Loosen, Attend or Unwind, set 8, 12 or 18 minutes, and choose your energy level. Walk recommends a session using these preferences, the time of day and recent practice. Start a timer, pause when needed, move to the next step and save how you feel at the end.
 
-LEARN BY NOTICING
-Open Range to explore Contact map, Shoulder compass, Standing roots, Rib window, A study of hands, Near, far, here, The attention trail and Easy tide. Quick field lessons teach setup, breathing and comfortable alternatives. Rest offers Evening inventory and Moss rest for the end of the day.
+PRACTICE A TRANSITION
+The arrival ritual, Screen intermission, Elbow room, Seated steps, Side space, Single channel, Gentle interval and Between two tasks offer written guidance for everyday breaks. Range lets you browse by category and study five short skill cards with setup, breathing and easier alternatives. Rest contains Closing shift and Quiet playback for an unhurried evening.
 
-FOUR COLUMNS
-Follow four rising columns through inhale, pause, exhale and pause. Soft current and Even leaves offer rhythms without holds. Each exercise explains the method and shows the phase, countdown and round. Pause whenever you need.
+BREATH STUDIO
+Four columns guides four rounds of inhale, pause, exhale and pause with four rising meters. Steady tempo and Longer out offer rhythms without holds. See the current phase, countdown and round, and pause the exercise whenever you like.
 
-YOUR PRIVATE TABLET
-Choose a reflection prompt and mood, write an observation, and tap Save note. Read your dated entries in Collected observations. Notes, preferences and practice history are stored locally. Private journal — fully offline. No account. No cloud.
+TABLET: YOUR PRIVATE RECAP
+Choose a prompt and mood, write a note and save it locally. Read dated recaps after reopening the app. Notes, preferences and practice history stay on this device. Private journal — fully offline. No account. No cloud.
 
-Choose Forest or Paper appearance, or match your device. Mosslight works without a network connection after installation.
+A porcelain-and-cobalt interface, warm orange rhythm markers and Day studio or Night studio appearance make your next pause easy to find.

@@ -60,69 +60,112 @@ class _WalkViewState extends State<WalkView> {
         muted = VisualTheme.mutedOf(context);
     final pick = _pick;
     return ListView(
-        padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
+        padding: const EdgeInsets.fromLTRB(20, 6, 20, 28),
         children: [
-          Text('YOUR DAILY FIELDWORK',
-              style: VisualTheme.micro(10, color: accent)),
-          const SizedBox(height: 10),
-          Text('A small practice.\nA steadier day.',
-              style: VisualTheme.display(38, color: ink)),
-          const SizedBox(height: 18),
+          Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                  color: VisualTheme.fuchsia,
+                  borderRadius: BorderRadius.circular(28)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      const Icon(Icons.graphic_eq,
+                          color: Colors.white, size: 24),
+                      const SizedBox(width: 8),
+                      Expanded(
+                          child: Text('YOUR DAILY MIX',
+                              style:
+                                  VisualTheme.micro(11, color: Colors.white))),
+                      const Icon(Icons.circle,
+                          color: VisualTheme.apricot, size: 14),
+                    ]),
+                    const SizedBox(height: 22),
+                    Text('Change the pace.\nKeep your centre.',
+                        style: VisualTheme.display(33, color: Colors.white)),
+                    const SizedBox(height: 14),
+                    Text(PracticeEngine.lessonOfDay(DateTime.now()),
+                        style: VisualTheme.body(14, color: Colors.white)),
+                    const SizedBox(height: 22),
+                    Wrap(spacing: 12, runSpacing: 8, children: [
+                      _Metric(label: '$_streak practice days'),
+                      _Metric(label: '$_week min this week'),
+                    ]),
+                  ])),
+          const SizedBox(height: 26),
           Row(children: [
-            const FieldMark(size: 82),
-            const SizedBox(width: 18),
             Expanded(
-                child: Text(PracticeEngine.lessonOfDay(DateTime.now()),
-                    style: VisualTheme.body(14, color: muted))),
+                child: Text('Up next',
+                    style: VisualTheme.heading(23, color: ink))),
+            Text('WALK', style: VisualTheme.micro(10, color: muted)),
           ]),
-          const SizedBox(height: 16),
-          const Divider(),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text('$_streak practice days  /  $_week min this week',
-                  style: VisualTheme.micro(10, color: muted))),
+          const SizedBox(height: 12),
           if (_error != null) ...[
             Text(_error!),
             TextButton(onPressed: _load, child: const Text('Try again'))
           ] else if (pick == null)
             const Center(child: CircularProgressIndicator())
           else ...[
-            Text('01 / WALK', style: VisualTheme.micro(11, color: accent)),
-            const SizedBox(height: 10),
             BayCard(session: pick, onTap: _start),
             const SizedBox(height: 12),
-            SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                    onPressed: _start,
-                    icon: const Icon(Icons.arrow_forward),
-                    label: const Text('Walk this session'))),
+            FilledButton.icon(
+                onPressed: _start,
+                icon: const Icon(Icons.play_arrow_rounded),
+                label: const Text('Walk this session')),
           ],
           const SizedBox(height: 28),
-          Text('02 / BREATHE', style: VisualTheme.micro(11, color: accent)),
-          const SizedBox(height: 8),
-          Text('Let a rhythm lead.',
-              style: VisualTheme.display(27, color: ink)),
+          Text('Breath studio', style: VisualTheme.heading(23, color: ink)),
+          const SizedBox(height: 6),
+          Text('Choose a rhythm. Follow the rising columns.',
+              style: VisualTheme.body(14, color: muted)),
           const SizedBox(height: 12),
-          for (final p in PracticeLibrary.patterns)
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Material(
-                    color: VisualTheme.bayOf(context),
-                    borderRadius: BorderRadius.circular(12),
-                    child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 6),
-                        leading: Icon(Icons.air, color: accent),
-                        title: Text(p.name),
-                        subtitle: Text('${p.rounds} rounds · guided breath'),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) => BreathView(pattern: p)))))),
-          const SizedBox(height: 16),
-          Text('All lessons are on your device. No signal needed.',
-              style: VisualTheme.body(12, color: muted)),
+          Material(
+              color: VisualTheme.bayOf(context),
+              borderRadius: BorderRadius.circular(24),
+              child: Column(children: [
+                for (var i = 0; i < PracticeLibrary.patterns.length; i++) ...[
+                  if (i > 0)
+                    const Divider(height: 1, indent: 60, endIndent: 20),
+                  ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 6),
+                      leading: CircleAvatar(
+                          backgroundColor: accent.withValues(alpha: .1),
+                          foregroundColor: accent,
+                          child: Text('0${i + 1}')),
+                      title: Text(PracticeLibrary.patterns[i].name),
+                      subtitle: Text(
+                          '${PracticeLibrary.patterns[i].rounds} rounds · guided rhythm'),
+                      trailing: Icon(Icons.play_circle_outline, color: accent),
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => BreathView(
+                              pattern: PracticeLibrary.patterns[i])))),
+                ],
+              ])),
+          const SizedBox(height: 24),
+          Row(children: [
+            Icon(Icons.offline_bolt_outlined, size: 18, color: muted),
+            const SizedBox(width: 8),
+            Expanded(
+                child: Text(
+                    'Always available. Everything stays on this device.',
+                    style: VisualTheme.body(12, color: muted))),
+          ]),
         ]);
   }
+}
+
+class _Metric extends StatelessWidget {
+  final String label;
+  const _Metric({required this.label});
+  @override
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: .15),
+            borderRadius: BorderRadius.circular(20)),
+        child: Text(label,
+            style: const TextStyle(color: Colors.white, fontSize: 12)),
+      );
 }

@@ -1,4 +1,4 @@
-/// Mosslight — an offline movement, breath, rest, and private journal teacher.
+/// Cadence Room — an offline movement, breath, rest, and private journal teacher.
 library;
 
 export 'src/screens/user_screen.dart';

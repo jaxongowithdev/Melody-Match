@@ -14,7 +14,7 @@ class _TabletViewState extends State<TabletView> {
   final _controller = TextEditingController();
   List<JournalEntry> _rows = [];
   int _prompt = 0;
-  String _mood = 'grounded';
+  String _mood = 'settled';
   bool _saving = false;
   String? _error;
   @override
@@ -79,10 +79,10 @@ class _TabletViewState extends State<TabletView> {
         muted = VisualTheme.mutedOf(context),
         accent = VisualTheme.accentOf(context);
     return ListView(padding: const EdgeInsets.all(24), children: [
-      Text('TABLET / PRIVATE FIELD NOTES',
+      Text('TABLET / YOUR PRIVATE RECAP',
           style: VisualTheme.micro(10, color: accent)),
       const SizedBox(height: 12),
-      Text('Keep what\nyou noticed.',
+      Text('Put the moment\ninto words.',
           style: VisualTheme.display(38, color: ink)),
       const SizedBox(height: 12),
       Text('Private journal — fully offline. No account. No cloud.',
@@ -112,8 +112,8 @@ class _TabletViewState extends State<TabletView> {
           minLines: 4,
           maxLines: 8,
           decoration: const InputDecoration(
-              labelText: 'Your observation',
-              hintText: 'A sensation, a sound, a small discovery…')),
+              labelText: 'Your note',
+              hintText: 'What changed? What would help next?')),
       const SizedBox(height: 12),
       ValueListenableBuilder<TextEditingValue>(
           valueListenable: _controller,
@@ -123,7 +123,7 @@ class _TabletViewState extends State<TabletView> {
               label: Text(_saving ? 'Saving…' : 'Save note'))),
       const SizedBox(height: 30),
       const Divider(),
-      Text('COLLECTED OBSERVATIONS / ${_rows.length}',
+      Text('SAVED RECAPS / ${_rows.length}',
           style: VisualTheme.micro(10, color: accent)),
       const SizedBox(height: 12),
       if (_error != null) ...[
@@ -132,7 +132,7 @@ class _TabletViewState extends State<TabletView> {
       ],
       if (_rows.isEmpty && _error == null)
         Text(
-            'Your first observation belongs here. A single sentence is enough.',
+            'Nothing saved yet. Try one sentence about the pause you just took.',
             style: VisualTheme.body(14, color: muted)),
       for (final row in _rows)
         Container(
@@ -140,7 +140,7 @@ class _TabletViewState extends State<TabletView> {
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
                 color: VisualTheme.bayOf(context),
-                border: Border(left: BorderSide(color: accent, width: 2))),
+                borderRadius: BorderRadius.circular(24)),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('${row.createdAt.split('T').first} / ${row.mood}',

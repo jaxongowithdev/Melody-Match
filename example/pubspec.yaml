@@ -1,5 +1,5 @@
-name: mosslight_example
-description: "Mosslight - Private offline movement and rest teacher"
+name: cadence_room_example
+description: "Cadence Room - Private offline movement and rest teacher"
 publish_to: 'none'
 version: 1.9.0+1
 environment:

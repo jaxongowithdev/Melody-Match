@@ -95,7 +95,7 @@ class _BreathViewState extends State<BreathView> {
           child: ListView(
         padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
         children: [
-          Text('BREATH / FOLLOW THE RISE',
+          Text('BREATH STUDIO',
               style:
                   VisualTheme.micro(10, color: VisualTheme.accentOf(context))),
           const SizedBox(height: 16),

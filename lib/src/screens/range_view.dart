@@ -26,10 +26,10 @@ class _RangeViewState extends State<RangeView> {
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
       children: [
-        Text('RANGE / THE FIELD GUIDE',
+        Text('YOUR PRACTICE COLLECTION',
             style: VisualTheme.micro(10, color: VisualTheme.accentOf(context))),
         const SizedBox(height: 12),
-        Text('Learn by noticing.',
+        Text('Pick your next pause.',
             style: VisualTheme.display(36, color: VisualTheme.inkOf(context))),
         const SizedBox(height: 16),
         Wrap(
@@ -71,11 +71,11 @@ class _RangeViewState extends State<RangeView> {
           ),
         ),
         const SizedBox(height: 8),
-        Text('QUICK FIELD LESSONS',
+        Text('SKILL CARDS',
             style: VisualTheme.micro(9, color: VisualTheme.accentOf(context))),
         const SizedBox(height: 8),
         Text(
-            'Study a single skill: setup, breathing and a comfortable alternative.',
+            'Learn the essentials in a minute: what to do, how to breathe and how to make it easier.',
             style: VisualTheme.body(14, color: muted)),
         const SizedBox(height: 10),
         ...PracticeLibrary.poses.map((p) => _PoseRow(pose: p)),

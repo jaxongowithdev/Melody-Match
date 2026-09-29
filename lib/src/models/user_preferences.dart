@@ -6,7 +6,7 @@ class UserPreferences {
   final bool showOnboarding;
 
   UserPreferences({
-    this.theme = 'dark',
+    this.theme = 'light',
     this.aspect = 'ease',
     this.minutes = 12,
     this.grain = 'even',

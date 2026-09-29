@@ -10,7 +10,7 @@ import 'package:user_screen/src/screens/breath_view.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets(
-    'Mosslight offline onboarding, Walk, breathing, Range and persistent Tablet',
+    'Cadence Room offline onboarding, Walk, breathing, Range and persistent Tablet',
     (tester) async {
       final storage = StorageManager.instance;
       await storage.savePreferences(UserPreferences());
@@ -30,6 +30,7 @@ void main() {
       }
       await tester.tap(find.text('Start my Walk'));
       await waitFor(find.text('Walk this session'));
+      await tester.ensureVisible(find.text('Walk this session'));
       await tester.tap(find.text('Walk this session'));
       await tester.pumpAndSettle();
       expect(find.byType(SessionPlayerView), findsOneWidget);
@@ -45,7 +46,7 @@ void main() {
       await tester.ensureVisible(find.text('Finish practice'));
       await tester.tap(find.text('Finish practice'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('grounded'));
+      await tester.tap(find.text('settled'));
       await waitFor(find.text('Walk this session'));
       expect((await storage.recentLogs()).isNotEmpty, isTrue);
       await tester.scrollUntilVisible(
@@ -64,11 +65,11 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Range'));
       await tester.pumpAndSettle();
-      expect(find.text('Learn by noticing.'), findsOneWidget);
+      expect(find.text('Pick your next pause.'), findsOneWidget);
       await tester.tap(find.text('Tablet'));
       await tester.pumpAndSettle();
       final note =
-          'Mosslight offline observation ${DateTime.now().millisecondsSinceEpoch}';
+          'Cadence Room offline observation ${DateTime.now().millisecondsSinceEpoch}';
       await tester.enterText(find.byType(TextField), note);
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Save note'));

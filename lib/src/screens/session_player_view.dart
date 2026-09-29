@@ -130,8 +130,8 @@ class _SessionPlayerViewState extends State<SessionPlayerView> {
                     runSpacing: 8,
                     children: [
                       for (final m in [
-                        'grounded',
-                        'clear',
+                        'settled',
+                        'awake',
                         'tired',
                         'unchanged'
                       ])

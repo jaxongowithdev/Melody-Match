@@ -5,7 +5,7 @@ import 'package:user_screen/src/utils/visual_theme.dart';
 import 'package:user_screen/src/widgets/stoa_chrome.dart';
 
 void main() {
-  testWidgets('bottom navigation opens all four destinations', (tester) async {
+  testWidgets('room tabs opens all four destinations', (tester) async {
     var selected = -1;
     await tester.pumpWidget(
       MaterialApp(

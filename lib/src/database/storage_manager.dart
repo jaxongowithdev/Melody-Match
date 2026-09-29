@@ -72,13 +72,15 @@ class StorageManager {
 
   Future<List<PracticeLog>> recentLogs({int limit = 20}) async {
     final db = await database;
-    final maps = await db.query('logs', orderBy: 'completedAt DESC', limit: limit);
+    final maps =
+        await db.query('logs', orderBy: 'completedAt DESC', limit: limit);
     return maps.map(PracticeLog.fromMap).toList();
   }
 
   Future<int> minutesThisWeek() async {
     final logs = await recentLogs(limit: 80);
-    final start = DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1));
+    final start =
+        DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1));
     final floor = DateTime(start.year, start.month, start.day);
     var sum = 0;
     for (final log in logs) {
@@ -103,7 +105,9 @@ class StorageManager {
       if (!days.contains(key)) {
         if (n == 0) {
           cursor = cursor.subtract(const Duration(days: 1));
-          if (!days.contains('${cursor.year}-${cursor.month}-${cursor.day}')) return 0;
+          if (!days.contains('${cursor.year}-${cursor.month}-${cursor.day}')) {
+            return 0;
+          }
           continue;
         }
         return n;

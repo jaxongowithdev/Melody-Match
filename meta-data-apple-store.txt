@@ -1,32 +1,28 @@
 APP NAME (max 30)
-Stillroom
+Mosslight
 
 SUBTITLE (max 30)
-Move, breathe & rest offline
-
-SHORT DESCRIPTION
-A private teacher for movement, breath, rest and reflection. Fully offline. No account. No cloud.
+Your offline field guide
 
 KEYWORDS (max 100)
-yoga,breath,meditation,journal,sleep,mindfulness,offline,stretch,relax,movement
+breath,movement,journal,offline,meditation,rest,focus,balance,body,awareness,mindfulness
 
 PROMOTIONAL TEXT (max 170)
-Make a little room for yourself. Guided movement, steady breathing, restful evenings and a private journal — fully offline. No account. No cloud.
+Find your steady ground. Learn with guided movement, rising-column breathing and a private field journal. Fully offline. No account. No cloud.
 
 DESCRIPTION
-Stillroom is your private, fully offline teacher for movement, breath, rest and reflection. All lessons are included on your device. There is no account, no login, no cloud sync and no remote AI.
+Mosslight is a complete offline teacher for body awareness, gentle movement, attention and rest. A forest-green field guide with ten original practices, five quick skill lessons and three guided breathing rhythms. All teaching is included on your device. No account, no login, no cloud sync and no remote AI.
 
-START WITH YOUR DAY
-Complete a short onboarding to choose what you need, how much time you have and your energy level. Walk recommends a session using these preferences, the time of day and your recent practice. Read a daily lesson and see your practice streak and minutes this week.
+BEGIN YOUR WALK
+Choose Ground, Move, Focus or Rest, then set an 8-, 12- or 18-minute practice window and a comfortable pace. Walk selects a session from your preferences, time of day and recent practice. Follow clear written cues and a timer. Start, pause, advance to the next step and save how you feel when you finish.
 
-MOVE WITH GUIDANCE
-Explore Range for yoga, mobility, breathing and seated practices. First light, Desk reset, Hips, gently and Middle back ease offer timed steps with written teaching cues. Pause or skip a step as needed. Short pose lessons explain setup, breathing and adjustments.
+LEARN BY NOTICING
+Open Range to explore Contact map, Shoulder compass, Standing roots, Rib window, A study of hands, Near, far, here, The attention trail and Easy tide. Quick field lessons teach setup, breathing and comfortable alternatives. Rest offers Evening inventory and Moss rest for the end of the day.
 
-FIND A STEADY RHYTHM
-Follow Four columns with four animated rising bands, or choose Evening 4–7–8, Long range or Small pulse. On-screen phase labels, counts and rounds guide each breathing practice.
+FOUR COLUMNS
+Follow four rising columns through inhale, pause, exhale and pause. Soft current and Even leaves offer rhythms without holds. Each exercise explains the method and shows the phase, countdown and round. Pause whenever you need.
 
-MAKE ROOM FOR REST
-Open Rest for quiet practices such as Body arrival, Count down, Set it down and Feet up. Choose Morning light, Quiet night or a theme that matches your device.
+YOUR PRIVATE TABLET
+Choose a reflection prompt and mood, write an observation, and tap Save note. Read your dated entries in Collected observations. Notes, preferences and practice history are stored locally. Private journal — fully offline. No account. No cloud.
 
-KEEP A PRIVATE TABLET
-Write a reflection in Tablet and tap Save note. Notes, preferences and practice history are stored locally on this device. Your journal remains fully offline. No account. No cloud.
+Choose Forest or Paper appearance, or match your device. Mosslight works without a network connection after installation.

@@ -1,5 +1,5 @@
 name: user_screen
-description: "Stillroom - A private, on-device movement, breath, rest, and journal teacher. Fully offline. No account. No cloud."
+description: "Mosslight - A complete offline teacher for body awareness, movement, breath and private field notes."
 version: 1.9.0+1
 
 environment:

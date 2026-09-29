@@ -39,22 +39,23 @@ class _PlinthViewState extends State<PlinthView> {
     final ink = VisualTheme.inkOf(context);
     final muted = VisualTheme.mutedOf(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Your room')),
+      appBar: AppBar(title: const Text('Your field guide')),
       body: prefs == null
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
               children: [
                 Text(
-                  'WHAT YOU NEED',
-                  style: VisualTheme.micro(9, color: VisualTheme.fuchsia),
+                  'PRACTICE INTENTION',
+                  style: VisualTheme.micro(9,
+                      color: VisualTheme.accentOf(context)),
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('ease', 'Ease'),
-                  ('sleep', 'Sleep'),
-                  ('stretch', 'Stretch'),
-                  ('sit', 'Sit'),
+                  ('ease', 'Ground'),
+                  ('sleep', 'Rest'),
+                  ('stretch', 'Move'),
+                  ('sit', 'Focus'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -65,7 +66,8 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 18),
                 Text(
                   'MINUTES',
-                  style: VisualTheme.micro(9, color: VisualTheme.fuchsia),
+                  style: VisualTheme.micro(9,
+                      color: VisualTheme.accentOf(context)),
                 ),
                 const SizedBox(height: 8),
                 ...VisualTheme.minuteChoices.map(
@@ -78,13 +80,14 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 18),
                 Text(
                   'TODAY’S ENERGY',
-                  style: VisualTheme.micro(9, color: VisualTheme.fuchsia),
+                  style: VisualTheme.micro(9,
+                      color: VisualTheme.accentOf(context)),
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('smooth', 'Smooth'),
-                  ('even', 'Even'),
-                  ('rough', 'Rough'),
+                  ('smooth', 'Gentle'),
+                  ('even', 'Unhurried'),
+                  ('rough', 'Curious'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -95,13 +98,14 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 18),
                 Text(
                   'LIGHT',
-                  style: VisualTheme.micro(9, color: VisualTheme.fuchsia),
+                  style: VisualTheme.micro(9,
+                      color: VisualTheme.accentOf(context)),
                 ),
                 const SizedBox(height: 8),
                 ...[
                   ('system', 'Match my device'),
-                  ('light', 'Morning light'),
-                  ('dark', 'Quiet night'),
+                  ('light', 'Paper'),
+                  ('dark', 'Forest'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -111,12 +115,12 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  'Stillroom keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
+                  'Mosslight keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
                   style: VisualTheme.body(14, color: muted),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'STILLROOM  ·  OFFLINE BY DESIGN',
+                  'MOSSLIGHT  ·  OFFLINE BY DESIGN',
                   style: VisualTheme.micro(9, color: ink),
                 ),
               ],
@@ -150,7 +154,9 @@ class _Pick extends StatelessWidget {
               Container(
                 width: 6,
                 height: 22,
-                color: selected ? VisualTheme.fuchsia : Colors.transparent,
+                color: selected
+                    ? VisualTheme.accentOf(context)
+                    : Colors.transparent,
               ),
               const SizedBox(width: 12),
               Text(

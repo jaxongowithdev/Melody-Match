@@ -3,7 +3,8 @@ class PracticeStep {
   final String cue;
   final int seconds;
 
-  const PracticeStep({required this.title, required this.cue, required this.seconds});
+  const PracticeStep(
+      {required this.title, required this.cue, required this.seconds});
 }
 
 class PracticeSession {

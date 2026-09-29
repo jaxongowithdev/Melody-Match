@@ -76,8 +76,13 @@ class _BreathViewState extends State<BreathView> {
   }
 
   double get _t {
-    if (_current.seconds <= 0) return 0;
-    return 1 - (_left / _current.seconds);
+    final progress = 1 - (_left / _current.seconds);
+    return switch (_current.label) {
+      'Inhale' => progress,
+      'Pause full' => 1,
+      'Exhale' => 1 - progress,
+      _ => 0,
+    };
   }
 
   @override
@@ -86,28 +91,42 @@ class _BreathViewState extends State<BreathView> {
     final muted = VisualTheme.mutedOf(context);
     return Scaffold(
       appBar: AppBar(title: Text(_p.name)),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(22, 12, 22, 28),
-        child: Column(
-          children: [
-            Text(_done ? 'The columns rest.' : _current.label.toUpperCase(), style: VisualTheme.micro(10, color: VisualTheme.fuchsia)),
-            const SizedBox(height: 18),
-            Expanded(
-              child: Center(
-                child: ColumnWalk(t: _done ? 0.2 : _t, color: VisualTheme.fuchsia),
-              ),
-            ),
-            Text(_done ? 'Done' : '$_left', style: VisualTheme.display(42, color: ink)),
-            const SizedBox(height: 6),
-            Text('Round $_round  /  ${_p.rounds}', style: VisualTheme.body(14, color: muted)),
-            const SizedBox(height: 18),
-            FilledButton(
+      body: SafeArea(
+          child: ListView(
+        padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
+        children: [
+          Text('BREATH / FOLLOW THE RISE',
+              style:
+                  VisualTheme.micro(10, color: VisualTheme.accentOf(context))),
+          const SizedBox(height: 16),
+          Text(_p.teaching, style: VisualTheme.body(15, color: muted)),
+          const SizedBox(height: 30),
+          Text(_done ? 'The columns rest.' : _current.label.toUpperCase(),
+              textAlign: TextAlign.center,
+              style:
+                  VisualTheme.micro(14, color: VisualTheme.accentOf(context))),
+          const SizedBox(height: 20),
+          Center(
+              child: ColumnWalk(
+                  t: _done ? 0 : _t, color: VisualTheme.accentOf(context))),
+          const Divider(),
+          const SizedBox(height: 12),
+          Text(_done ? 'Done' : '$_left',
+              textAlign: TextAlign.center,
+              style: VisualTheme.display(54, color: ink)),
+          Text('Round $_round / ${_p.rounds}',
+              textAlign: TextAlign.center,
+              style: VisualTheme.body(14, color: muted)),
+          const SizedBox(height: 24),
+          FilledButton(
               onPressed: _done ? () => Navigator.of(context).pop() : _toggle,
-              child: Text(_done ? 'Leave the bay' : _running ? 'Hold' : 'Raise'),
-            ),
-          ],
-        ),
-      ),
+              child: Text(_done
+                  ? 'Back to Walk'
+                  : _running
+                      ? 'Pause breathing'
+                      : 'Start breathing')),
+        ],
+      )),
     );
   }
 }

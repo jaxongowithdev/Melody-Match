@@ -13,7 +13,7 @@ class PracticeEngine {
     final used = recent.take(3).map((l) => l.sessionId).toSet();
 
     var pool = PracticeLibrary.sessions.where((s) {
-      final fitsTime = s.minutes <= prefs.minutes + 10;
+      final fitsTime = s.minutes <= prefs.minutes;
       final fitsGrain = prefs.grain != 'smooth' || s.level != 'rough';
       return fitsTime && fitsGrain;
     }).toList();
@@ -51,13 +51,13 @@ class PracticeEngine {
 
   static String lessonOfDay(DateTime now) {
     const lessons = [
-      'The exhale can be your teacher. Let the inhale arrive on its own.',
-      'A bent knee is still the lesson. Depth is never a grade.',
-      'Bring attention back once, as gently as you would guide a child.',
-      'Thirteen minutes counts. You do not need a free hour to care for yourself.',
-      'A worry can wait overnight. You may know where it is without carrying it.',
-      'Breathe into the back of the body. Your chest has nothing to prove.',
-      'Leave something unfinished. The room will be here tomorrow.',
+      'Start at a point of contact. A foot on the floor is already something to notice.',
+      'Try less movement, then pause. Notice whether less tells you more.',
+      'Attention wanders. Returning to one sensation is the practice.',
+      'Eight minutes can hold a complete lesson. Begin with the time you have.',
+      'Notice the difference between describing a sensation and judging it.',
+      'Let breathing be ordinary. There is no score for a larger breath.',
+      'A field note can be one sentence: what was here, and what you noticed.',
     ];
     return lessons[now.day % lessons.length];
   }

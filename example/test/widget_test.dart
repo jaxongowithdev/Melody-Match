@@ -5,38 +5,41 @@ import 'package:user_screen/src/utils/visual_theme.dart';
 import 'package:user_screen/src/widgets/stoa_chrome.dart';
 
 void main() {
-  testWidgets('stoa columns show four rooms and report taps', (tester) async {
-    var picked = -1;
-    await tester.pumpWidget(MaterialApp(
-      theme: VisualTheme.lightTheme,
-      home: Scaffold(
-        body: StoaColon(index: 0, onSelect: (i) => picked = i),
+  testWidgets('bottom navigation opens all four destinations', (tester) async {
+    var selected = -1;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: VisualTheme.darkTheme,
+        home: Scaffold(
+          bottomNavigationBar: StoaColon(
+            index: 0,
+            onSelect: (i) => selected = i,
+          ),
+        ),
       ),
-    ));
-
-    expect(find.text('I'), findsOneWidget);
-    expect(find.text('II'), findsOneWidget);
-    expect(find.text('III'), findsOneWidget);
-    expect(find.text('IV'), findsOneWidget);
-    expect(find.text('Walk'), findsOneWidget);
-    expect(find.text('Range'), findsOneWidget);
-    expect(find.text('Shade'), findsOneWidget);
-    expect(find.text('Tablet'), findsOneWidget);
-
-    await tester.tap(find.text('Shade'));
-    expect(picked, 2);
+    );
+    for (final name in ['Walk', 'Range', 'Rest', 'Tablet']) {
+      expect(find.text(name), findsOneWidget);
+    }
+    await tester.tap(find.text('Tablet'));
+    expect(selected, 3);
+    expect(tester.takeException(), isNull);
   });
-
-  testWidgets('a bay card renders its session', (tester) async {
+  testWidgets('field lesson card exposes its session and opens on tap', (
+    tester,
+  ) async {
+    var opened = false;
     final session = PracticeLibrary.sessions.first;
-    await tester.pumpWidget(MaterialApp(
-      theme: VisualTheme.lightTheme,
-      home: Scaffold(
-        body: BayCard(session: session, onTap: () {}),
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: VisualTheme.darkTheme,
+        home: Scaffold(
+          body: BayCard(session: session, onTap: () => opened = true),
+        ),
       ),
-    ));
-
-    expect(find.text(session.title), findsOneWidget);
-    expect(find.text(session.subtitle), findsOneWidget);
+    );
+    await tester.tap(find.text(session.title));
+    expect(opened, isTrue);
+    expect(tester.takeException(), isNull);
   });
 }

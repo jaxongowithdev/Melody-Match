@@ -10,12 +10,14 @@ class ShadeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final muted = VisualTheme.mutedOf(context);
-    final rest = PracticeLibrary.sessions.where((s) => s.kind == 'sleep' || s.aims.contains('sleep')).toList();
+    final rest = PracticeLibrary.sessions
+        .where((s) => s.kind == 'sleep' || s.aims.contains('sleep'))
+        .toList();
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
       children: [
         Text(
-          'Wind-downs for the bed or a dark room. If you sleep during a body shade, that is the practice.',
+          'REST / Close the field guide. Let support, ordinary memories and a body scan help you put down the day.',
           style: VisualTheme.body(16, color: muted),
         ),
         const SizedBox(height: 14),
@@ -25,7 +27,8 @@ class ShadeView extends StatelessWidget {
             child: BayCard(
               session: s,
               onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => SessionPlayerView(session: s, dim: true)),
+                MaterialPageRoute(
+                    builder: (_) => SessionPlayerView(session: s, dim: true)),
               ),
             ),
           ),

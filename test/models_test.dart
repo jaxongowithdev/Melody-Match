@@ -10,7 +10,7 @@ void main() {
     expect(ids.length, PracticeLibrary.sessions.length);
     for (final session in PracticeLibrary.sessions) {
       expect(session.steps, isNotEmpty);
-      expect(session.totalSeconds, greaterThan(0));
+      expect(session.totalSeconds, session.minutes * 60);
     }
   });
 
@@ -27,28 +27,28 @@ void main() {
     expect(back.body, entry.body);
   });
 
-  test('preferences default to a light nineteen-minute ease walk', () {
+  test('preferences default to a dark twelve-minute ease walk', () {
     final prefs = UserPreferences();
     expect(prefs.aspect, 'ease');
-    expect(prefs.minutes, 19);
-    expect(prefs.theme, 'light');
+    expect(prefs.minutes, 12);
+    expect(prefs.theme, 'dark');
     expect(prefs.showOnboarding, isTrue);
     expect(UserPreferences.fromMap(prefs.toMap()).grain, 'even');
   });
 
-  test('engine avoids repeating the last session when it can', () {
-    const last = PracticeLog(
-      sessionId: 'morning-walk',
-      title: 'Morning walk',
-      minutes: 19,
-      completedAt: '2026-09-24T07:00:00.000',
-    );
-    final pick = PracticeEngine.pickWalk(
-      prefs: UserPreferences(aspect: 'ease', minutes: 19, grain: 'smooth'),
-      recent: const [last],
-      now: DateTime(2026, 9, 24, 7, 30),
-    );
-    expect(pick.id, isNot('morning-walk'));
+  test('engine avoids its last recommendation when alternatives exist', () {
+    final prefs = UserPreferences(aspect: 'ease', minutes: 8, grain: 'smooth');
+    final now = DateTime(2026, 9, 29, 8);
+    final first = PracticeEngine.pickWalk(prefs: prefs, recent: [], now: now);
+    final second = PracticeEngine.pickWalk(prefs: prefs, now: now, recent: [
+      PracticeLog(
+          sessionId: first.id,
+          title: first.title,
+          minutes: first.minutes,
+          completedAt: now.toIso8601String()),
+    ]);
+    expect(second.id, isNot(first.id));
+    expect(second.minutes, lessThanOrEqualTo(prefs.minutes));
   });
 
   test('night hour leans toward rest', () {
@@ -61,9 +61,12 @@ void main() {
   });
 
   test('hour greeting changes across the day', () {
-    expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 8)), 'Good morning');
-    expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 14)), 'A little reset');
-    expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 19)), 'Ease into evening');
+    expect(
+        PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 8)), 'Good morning');
+    expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 14)),
+        'A little reset');
+    expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 19)),
+        'Ease into evening');
     expect(PracticeEngine.hourGreeting(DateTime(2026, 1, 1, 23)), 'Good night');
   });
 }

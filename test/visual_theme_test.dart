@@ -10,13 +10,15 @@ void main() {
   });
 
   test('kind tints differ', () {
-    final colours = ['yoga', 'breath', 'sleep', 'sit', 'mobility'].map(VisualTheme.kindTint).toSet();
+    final colours = ['yoga', 'breath', 'sleep', 'sit', 'mobility']
+        .map(VisualTheme.kindTint)
+        .toSet();
     expect(colours.length, 5);
   });
 
   test('aspect labels are human', () {
-    expect(VisualTheme.aspectLabel('sleep'), 'Sleep');
-    expect(VisualTheme.aspectLabel('sit'), 'Sit');
-    expect(VisualTheme.aspectLabel('ease'), 'Ease');
+    expect(VisualTheme.aspectLabel('sleep'), 'Rest');
+    expect(VisualTheme.aspectLabel('sit'), 'Focus');
+    expect(VisualTheme.aspectLabel('ease'), 'Ground');
   });
 }

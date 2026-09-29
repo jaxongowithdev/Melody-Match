@@ -91,61 +91,54 @@ class _BreathViewState extends State<BreathView> {
         muted = VisualTheme.mutedOf(context),
         accent = VisualTheme.accentOf(context);
     return Scaffold(
-      appBar: AppBar(title: Text(_p.name)),
-      body: SafeArea(
-          child: Column(children: [
-        Expanded(
-            child: ListView(padding: const EdgeInsets.all(24), children: [
-          Wrap(spacing: 8, runSpacing: 8, children: [
-            for (var i = 0; i < _p.phases.length; i++)
-              Chip(
-                  backgroundColor: i == _phase && !_done
-                      ? accent
-                      : VisualTheme.bayOf(context),
-                  label: Text(_p.phases[i].label,
-                      style: TextStyle(
-                          color: i == _phase && !_done
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : ink))),
-          ]),
-          const SizedBox(height: 24),
-          Container(
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-              decoration: BoxDecoration(
-                  color: VisualTheme.bayOf(context),
-                  borderRadius: BorderRadius.circular(30)),
-              child: Column(children: [
-                Text(_done ? 'The tide is quiet.' : _current.label,
-                    style: VisualTheme.heading(23, color: ink)),
-                const SizedBox(height: 24),
-                ColumnWalk(t: _done ? 0 : _t, color: accent),
-                const SizedBox(height: 22),
-                Text(_done ? 'Done' : '$_left',
-                    style: VisualTheme.display(48, color: ink)),
-                Text('Round $_round / ${_p.rounds}',
-                    style: VisualTheme.body(13, color: muted)),
-              ])),
-          const SizedBox(height: 20),
-          Text(_p.teaching, style: VisualTheme.body(14, color: muted)),
-        ])),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
-            child: SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                    onPressed:
-                        _done ? () => Navigator.of(context).pop() : _toggle,
-                    icon: Icon(_done
-                        ? Icons.check
-                        : _running
-                            ? Icons.pause
-                            : Icons.play_arrow),
-                    label: Text(_done
-                        ? 'Back to Walk'
-                        : _running
-                            ? 'Pause breathing'
-                            : 'Start breathing')))),
-      ])),
-    );
+        appBar: AppBar(title: Text(_p.name)),
+        body: SafeArea(
+            child: Column(children: [
+          Expanded(
+              child: ListView(padding: const EdgeInsets.all(24), children: [
+            Text('A RHYTHM TO RETURN TO',
+                style: VisualTheme.micro(10, color: accent)),
+            const SizedBox(height: 14),
+            Text(_done ? 'Let the columns rest.' : _current.label,
+                style: VisualTheme.display(36, color: ink)),
+            const SizedBox(height: 8),
+            Text('Round $_round / ${_p.rounds}',
+                style: VisualTheme.body(14, color: muted)),
+            const SizedBox(height: 30),
+            Center(child: ColumnWalk(t: _done ? 0 : _t, color: accent)),
+            const SizedBox(height: 20),
+            Text(_done ? 'Done' : '$_left',
+                textAlign: TextAlign.center,
+                style: VisualTheme.display(54, color: ink)),
+            const SizedBox(height: 16),
+            Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 12,
+                runSpacing: 8,
+                children: [
+                  for (var i = 0; i < _p.phases.length; i++)
+                    Text(_p.phases[i].label,
+                        style: VisualTheme.body(12,
+                            color: i == _phase && !_done ? accent : muted,
+                            w: i == _phase
+                                ? FontWeight.w700
+                                : FontWeight.w400)),
+                ]),
+            const Divider(height: 36),
+            Text(_p.teaching, style: VisualTheme.body(15, color: muted)),
+          ])),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+              child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                      onPressed:
+                          _done ? () => Navigator.of(context).pop() : _toggle,
+                      child: Text(_done
+                          ? 'Back to Walk'
+                          : _running
+                              ? 'Pause breathing'
+                              : 'Start breathing')))),
+        ])));
   }
 }

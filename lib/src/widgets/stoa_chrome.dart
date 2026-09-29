@@ -10,69 +10,31 @@ class MistWash extends StatelessWidget {
       ColoredBox(color: VisualTheme.mistOf(context), child: child);
 }
 
-/// A top-mounted, scroll-safe destination strip.
 class StoaColon extends StatelessWidget {
   final int index;
   final ValueChanged<int> onSelect;
   const StoaColon({super.key, required this.index, required this.onSelect});
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
-        child: Container(
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                color: VisualTheme.bayOf(context),
-                borderRadius: BorderRadius.circular(24)),
-            child: Row(children: [
-              for (var i = 0; i < 4; i++)
-                Expanded(
-                    child: Semantics(
-                        selected: index == i,
-                        button: true,
-                        child: Material(
-                            color: index == i
-                                ? VisualTheme.fuchsia
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(19),
-                            child: InkWell(
-                                onTap: () => onSelect(i),
-                                borderRadius: BorderRadius.circular(19),
-                                child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 2),
-                                    child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                              [
-                                                Icons.dashboard_outlined,
-                                                Icons.widgets_outlined,
-                                                Icons.nights_stay_outlined,
-                                                Icons.inventory_2_outlined
-                                              ][i],
-                                              size: 19,
-                                              color: index == i
-                                                  ? Colors.white
-                                                  : VisualTheme.mutedOf(
-                                                      context)),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                              [
-                                                'Walk',
-                                                'Range',
-                                                'Rest',
-                                                'Tablet'
-                                              ][i],
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: index == i
-                                                      ? Colors.white
-                                                      : VisualTheme.mutedOf(
-                                                          context))),
-                                        ])))))),
-            ])),
-      );
+  Widget build(BuildContext context) =>
+      Column(mainAxisSize: MainAxisSize.min, children: [
+        for (var i = 0; i < 4; i++)
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              child: ListTile(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  selected: index == i,
+                  selectedTileColor:
+                      VisualTheme.accentOf(context).withValues(alpha: .12),
+                  leading: Icon([
+                    Icons.route,
+                    Icons.map_outlined,
+                    Icons.bedtime_outlined,
+                    Icons.article_outlined
+                  ][i]),
+                  title: Text(['Walk', 'Range', 'Rest', 'Tablet'][i]),
+                  onTap: () => onSelect(i))),
+      ]);
 }
 
 class StoaTitle extends StatelessWidget {
@@ -80,29 +42,15 @@ class StoaTitle extends StatelessWidget {
   const StoaTitle({super.key, this.trailing});
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 12, 0),
-        child: Row(children: [
-          Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: VisualTheme.fuchsia,
-                  borderRadius: BorderRadius.circular(12)),
-              child: const Icon(Icons.waves, color: Colors.white, size: 22)),
-          const SizedBox(width: 10),
-          Expanded(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                Text('Tideframe',
-                    style: VisualTheme.heading(21,
-                        color: VisualTheme.inkOf(context), w: FontWeight.w800)),
-                Text('YOUR OFFLINE PRACTICE SPACE',
-                    style: VisualTheme.micro(8,
-                        color: VisualTheme.mutedOf(context))),
-              ])),
-          if (trailing != null) trailing!,
-        ]),
-      );
+      padding: const EdgeInsets.all(20),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Icon(Icons.local_fire_department_outlined,
+            size: 30, color: VisualTheme.accentOf(context)),
+        const SizedBox(height: 12),
+        Text('Ember\nAtlas',
+            style: VisualTheme.display(28, color: VisualTheme.inkOf(context))),
+        if (trailing != null) trailing!,
+      ]));
 }
 
 class BayCard extends StatelessWidget {
@@ -111,56 +59,41 @@ class BayCard extends StatelessWidget {
   const BayCard({super.key, required this.session, required this.onTap});
   @override
   Widget build(BuildContext context) => Material(
-        color: VisualTheme.bayOf(context),
-        borderRadius: BorderRadius.circular(24),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(24),
+      color: VisualTheme.bayOf(context),
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
           onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
           child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(
-                              color: VisualTheme.kindTint(session.kind)
-                                  .withValues(alpha: .3),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Text(session.kind.toUpperCase(),
-                              style: VisualTheme.micro(9,
-                                  color: VisualTheme.inkOf(context)))),
-                      const Spacer(),
-                      Text('${session.minutes} min',
-                          style: VisualTheme.heading(14,
+              padding: const EdgeInsets.all(18),
+              child:
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SizedBox(
+                    width: 42,
+                    child: Column(children: [
+                      Text('${session.minutes}',
+                          style: VisualTheme.display(28,
+                              color: VisualTheme.accentOf(context))),
+                      Text('MIN',
+                          style: VisualTheme.micro(9,
                               color: VisualTheme.mutedOf(context))),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.north_east, size: 18),
-                    ]),
-                    const SizedBox(height: 18),
-                    Text(session.title,
-                        style: VisualTheme.heading(23,
-                            color: VisualTheme.inkOf(context),
-                            w: FontWeight.w700)),
-                    const SizedBox(height: 8),
-                    Text(session.subtitle,
-                        style: VisualTheme.body(14,
-                            color: VisualTheme.mutedOf(context))),
-                    const SizedBox(height: 16),
-                    Row(children: [
-                      for (var i = 0; i < 4; i++)
-                        Expanded(
-                            child: Container(
-                                height: 4,
-                                margin: const EdgeInsets.only(right: 4),
-                                color: VisualTheme.accentOf(context)
-                                    .withValues(alpha: .15 + i * .15)))
-                    ]),
-                  ])),
-        ),
-      );
+                    ])),
+                const SizedBox(width: 16),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Text(session.title,
+                          style: VisualTheme.heading(18,
+                              color: VisualTheme.inkOf(context))),
+                      const SizedBox(height: 6),
+                      Text(session.subtitle,
+                          style: VisualTheme.body(13,
+                              color: VisualTheme.mutedOf(context))),
+                    ])),
+                const SizedBox(width: 8),
+                const Icon(Icons.chevron_right, size: 20),
+              ]))));
 }
 
 class FieldMark extends StatelessWidget {
@@ -170,39 +103,43 @@ class FieldMark extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(
       width: size,
       height: size,
-      child: CustomPaint(painter: _TidePainter(VisualTheme.accentOf(context))));
+      child:
+          CustomPaint(painter: _AtlasPainter(VisualTheme.accentOf(context))));
 }
 
-class _TidePainter extends CustomPainter {
+class _AtlasPainter extends CustomPainter {
   final Color color;
-  _TidePainter(this.color);
+  _AtlasPainter(this.color);
   @override
   void paint(Canvas canvas, Size size) {
     final w = size.width, h = size.height;
-    canvas.drawRRect(
-        RRect.fromRectAndRadius(
-            Rect.fromLTWH(w * .15, h * .08, w * .7, h * .84),
-            Radius.circular(w * .14)),
-        Paint()..color = color.withValues(alpha: .15));
-    canvas.drawCircle(
-        Offset(w * .71, h * .28), w * .1, Paint()..color = VisualTheme.apricot);
-    for (var i = 0; i < 2; i++) {
-      final path = Path()
-        ..moveTo(w * .06, h * (.43 + i * .24))
-        ..cubicTo(w * .4, h * (.12 + i * .24), w * .6, h * (.85 + i * .05),
-            w * .94, h * (.5 + i * .2));
+    for (var i = 0; i < 3; i++) {
+      final inset = w * (.1 + i * .13);
+      final p = Path()
+        ..moveTo(inset, h * .9)
+        ..lineTo(inset, h * .5)
+        ..quadraticBezierTo(inset, h * .2, w * .5, h * (.08 + i * .12))
+        ..quadraticBezierTo(w - inset, h * .2, w - inset, h * .5)
+        ..lineTo(w - inset, h * .9);
       canvas.drawPath(
-          path,
+          p,
           Paint()
-            ..color = color
+            ..color = color.withValues(alpha: 1 - i * .2)
             ..style = PaintingStyle.stroke
-            ..strokeWidth = w * .09
+            ..strokeWidth = w * .045
             ..strokeCap = StrokeCap.round);
     }
+    final diamond = Path()
+      ..moveTo(w * .5, h * .58)
+      ..lineTo(w * .58, h * .7)
+      ..lineTo(w * .5, h * .82)
+      ..lineTo(w * .42, h * .7)
+      ..close();
+    canvas.drawPath(diamond, Paint()..color = color);
   }
 
   @override
-  bool shouldRepaint(_TidePainter oldDelegate) => oldDelegate.color != color;
+  bool shouldRepaint(_AtlasPainter oldDelegate) => oldDelegate.color != color;
 }
 
 class ColumnWalk extends StatelessWidget {
@@ -212,7 +149,7 @@ class ColumnWalk extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(
       width: 240,
-      height: 180,
+      height: 210,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -220,19 +157,21 @@ class ColumnWalk extends StatelessWidget {
             for (var i = 0; i < 4; i++)
               SizedBox(
                   width: 42,
-                  height: 180,
+                  height: 210,
                   child: Stack(alignment: Alignment.bottomCenter, children: [
                     Container(
                         decoration: BoxDecoration(
-                            color: color.withValues(alpha: .08),
-                            borderRadius: BorderRadius.circular(21))),
+                            border:
+                                Border.all(color: color.withValues(alpha: .25)),
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(21)))),
                     AnimatedContainer(
                         duration: const Duration(milliseconds: 700),
-                        curve: Curves.easeInOut,
-                        height: 20 + t.clamp(0.0, 1.0) * 160,
+                        height: 16 + t.clamp(0.0, 1.0) * 194,
                         decoration: BoxDecoration(
-                            color: color.withValues(alpha: 1 - i * .15),
-                            borderRadius: BorderRadius.circular(21))),
+                            color: color.withValues(alpha: 1 - i * .14),
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(21)))),
                   ])),
           ]));
 }

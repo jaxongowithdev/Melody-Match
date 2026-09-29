@@ -6,7 +6,7 @@ class UserPreferences {
   final bool showOnboarding;
 
   UserPreferences({
-    this.theme = 'light',
+    this.theme = 'dark',
     this.aspect = 'ease',
     this.minutes = 12,
     this.grain = 'even',
@@ -22,9 +22,9 @@ class UserPreferences {
       };
 
   factory UserPreferences.fromMap(Map<String, dynamic> map) => UserPreferences(
-        theme: map['theme'] as String? ?? 'light',
+        theme: map['theme'] as String? ?? 'dark',
         aspect: map['aspect'] as String? ?? 'ease',
-        minutes: map['minutes'] as int? ?? 19,
+        minutes: map['minutes'] as int? ?? 12,
         grain: map['grain'] as String? ?? 'even',
         showOnboarding: (map['showOnboarding'] as int? ?? 1) == 1,
       );

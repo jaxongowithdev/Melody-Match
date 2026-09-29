@@ -11,7 +11,7 @@ import 'package:user_screen/src/screens/tablet_view.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets(
-    'Tideframe offline onboarding, Walk, breathing, Range and persistent Tablet',
+    'Ember Atlas offline onboarding, Walk, breathing, Range and persistent Tablet',
     (tester) async {
       final storage = StorageManager.instance;
       await storage.savePreferences(UserPreferences());
@@ -47,7 +47,7 @@ void main() {
       await tester.ensureVisible(find.text('Finish practice'));
       await tester.tap(find.text('Finish practice'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('steady'));
+      await tester.tap(find.text('grounded'));
       await waitFor(find.text('Walk this session'));
       expect((await storage.recentLogs()).isNotEmpty, isTrue);
       await tester.scrollUntilVisible(
@@ -64,9 +64,13 @@ void main() {
       await tester.pumpAndSettle();
       await tester.pageBack();
       await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Range'));
       await tester.pumpAndSettle();
-      expect(find.text('Explore your range.'), findsOneWidget);
+      expect(find.text('The route index.'), findsOneWidget);
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Tablet'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('New note'));
@@ -80,24 +84,29 @@ void main() {
         isNull,
       );
       await tester.tap(find.text('Another prompt'));
-      await tester.tap(find.text('lighter').last);
+      await tester.ensureVisible(find.text('clear'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('clear'));
       final note =
-          'Tideframe offline observation ${DateTime.now().millisecondsSinceEpoch}';
+          'Ember Atlas offline observation ${DateTime.now().millisecondsSinceEpoch}';
       await tester.enterText(find.byType(TextField), note);
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Save note'));
       await tester.tap(find.text('Save note'));
       await waitFor(find.text('Note saved on this device.'));
       expect((await storage.allJournal()).any((e) => e.body == note), isTrue);
-      await tester.tap(find.text('steady'));
+      await tester.enterText(find.byType(TextField), 'no-matching-trace');
       await tester.pumpAndSettle();
       expect(find.text(note), findsNothing);
-      await tester.tap(find.text('All moments'));
+      expect(find.text('No notes match this search.'), findsOneWidget);
+      await tester.enterText(find.byType(TextField), '');
       await tester.pumpAndSettle();
       await tester.pumpWidget(const SizedBox.shrink());
       await tester.pumpAndSettle();
       await tester.pumpWidget(const UserScreen());
       await waitFor(find.text('Walk this session'));
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Tablet'));
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(

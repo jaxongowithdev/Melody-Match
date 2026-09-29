@@ -51,13 +51,13 @@ class PracticeEngine {
 
   static String lessonOfDay(DateTime now) {
     const lessons = [
-      'Try listening to one sound before reaching for the next task.',
-      'A smaller movement still gives you something to notice.',
-      'Let the count support your breathing, never force it.',
-      'You can change position before discomfort becomes a distraction.',
-      'An ordinary detail is enough to bring attention back.',
-      'A completed practice can feel quiet, lively or unchanged.',
-      'Leave one finished thing finished. You do not need to improve it tonight.',
+      'Begin where there is support. You do not need to earn a pause.',
+      'A quiet detail can be a useful landmark in a busy day.',
+      'Comfort is information. Let it shape the size of your movement.',
+      'The next return can be gentle, even after a long distraction.',
+      'A note can record a question without answering it.',
+      'Nothing needs to become a habit today. One practice can stand alone.',
+      'Leave room for an ordinary ending. Rest is not a performance.',
     ];
     return lessons[now.day % lessons.length];
   }

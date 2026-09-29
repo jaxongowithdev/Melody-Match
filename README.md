@@ -1,15 +1,19 @@
-# Tideframe
+# Ember Atlas
 
-A complete offline teacher with a cobalt modular dashboard, top destination strip, circular session timer, adaptive practice collection and modal journal composer.
+A complete offline teacher with a three-station Walk, side navigation, expandable route collections, guided step checklist and full-screen journal editor.
 
-Includes ten original four-step practices, five short lessons and three breath patterns. Complete onboarding, walk a session on Walk, run Four columns, open Range and save a Tablet note. Journal cards can be filtered by feeling. No account, login, cloud sync or remote AI.
+Ten original four-step practices, five field skills and three breathing patterns are included. Complete onboarding, walk a session on Walk, run Four columns, open Range and save a Tablet note. Search notes by body, prompt or feeling. No account, login, cloud sync or remote AI.
 
-App identity: `com.app.tideframe.build`. Metadata: `com.app.tideframe.build.json`. All iOS configurations use the new name and bundle ID. The SQLite filename is retained for storage compatibility; changing the bundle ID creates a separate app sandbox.
+Identity: `com.app.emberatlas.build`. Metadata file: `com.app.emberatlas.build.json`. All iOS app configurations use this bundle ID and the display name Ember Atlas. The SQLite filename is retained; a different bundle ID has a separate app sandbox. Existing note data is not deleted.
 
-Run `flutter analyze` and `flutter test` at the package root. In `example`, run widget tests and `flutter test integration_test/plugin_integration_test.dart -d <simulator-id>`.
+Run `flutter analyze` and `flutter test` at the root. Run widget tests in `example` and `flutter test integration_test/plugin_integration_test.dart -d <simulator-id>` for the native workflow.
 
-Externally hosted support and privacy URLs are preserved. The current privacy URL still refers to Soft Margin; provide or publish the Tideframe privacy policy before store submission. No store submission was performed.
+Verification: static analysis is clean. All 38 package tests, 2 example widget tests and 1 iOS integration test pass. Coverage includes enlarged-text narrow/landscape layouts in both themes, the full note editor, completed session and breath timers, expandable Range lessons, drawer navigation, note creation/search and reading saved notes after rebuilding the app.
 
-Icon generated with the built-in ImageGen tool. Source: `assets/tideframe_app_icon.png`. Production master: `assets/app_icon.png`. All iOS icon sizes derive from this master.
+Native iPhone onboarding was visually checked. Preview: `srcs/ember-atlas-onboarding.png`.
 
-Final icon prompt: Use case: logo-brand. Asset type: iOS app icon for Tideframe, an offline practice teacher. Primary request: a bold sculptural tide symbol, two flowing pale icy-blue ceramic wave bands passing through an open cobalt-blue rectangular frame, with one small chartreuse sun inset. Deep cobalt #244DDB full-bleed background filling every corner. Minimal tactile glazed ceramic with subtle soft shadow, frontal view, strong large silhouette, generous clear margins, readable at 32px. Premium contemporary digital instrument feel. No text, letters, numbers, book, folded paper, leaves, watermark, border, rounded outer corners or device mockup. Opaque square 1024x1024.
+External support and privacy URLs are preserved from the current metadata. The privacy URL still refers to Tideframe; provide or publish an Ember Atlas policy before store submission. No store submission was performed.
+
+The icon was generated with the built-in ImageGen tool. Source: `assets/ember_atlas_app_icon.png`. Production master: `assets/app_icon.png`; all iOS icon sizes derive from it.
+
+Final icon prompt: Use case: logo-brand. Asset type: opaque square iOS app icon for Ember Atlas, a private offline practice teacher. A single sculptural amber lantern formed from three stacked curved terracotta and golden stone arches, a glowing pale-gold diamond ember in its centre. Background is full-bleed warm charcoal #24231F, with a barely visible matte mineral texture. Frontal, symmetrical, bold minimal silhouette with generous margin, readable at tiny size. Material: satin carved stone with warm internal light, restrained soft shadow, contemporary and calm. No text, letters, numbers, waves, books, leaves, border, watermark, rounded outer corners, phone or mockup. 1024x1024.

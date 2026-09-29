@@ -56,187 +56,155 @@ class _WalkViewState extends State<WalkView> {
   @override
   Widget build(BuildContext context) {
     final ink = VisualTheme.inkOf(context),
-        muted = VisualTheme.mutedOf(context);
+        muted = VisualTheme.mutedOf(context),
+        accent = VisualTheme.accentOf(context);
     final pick = _pick;
     return ListView(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
         children: [
-          Text('Find your rhythm.', style: VisualTheme.display(32, color: ink)),
-          const SizedBox(height: 6),
-          Text('One practice. A breath. A moment to keep.',
-              style: VisualTheme.body(14, color: muted)),
-          const SizedBox(height: 20),
-          Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                  color: VisualTheme.fuchsia,
-                  borderRadius: BorderRadius.circular(30)),
+          Text('EMBER ATLAS / TODAY’S ROUTE',
+              style: VisualTheme.micro(10, color: accent)),
+          const SizedBox(height: 16),
+          Text('A small path\nback to yourself.',
+              style: VisualTheme.display(38, color: ink)),
+          const SizedBox(height: 14),
+          Text(PracticeEngine.lessonOfDay(DateTime.now()),
+              style: VisualTheme.body(15, color: muted)),
+          const SizedBox(height: 28),
+          _Station(
+              number: '01',
+              label: 'ARRIVE & PRACTICE',
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(children: [
-                      const Icon(Icons.play_circle_outline,
-                          color: VisualTheme.apricot),
-                      const SizedBox(width: 8),
-                      Expanded(
-                          child: Text('YOUR WALK',
-                              style:
-                                  VisualTheme.micro(11, color: Colors.white))),
-                      if (pick != null)
-                        Text('${pick.minutes} MIN',
-                            style: VisualTheme.micro(11, color: Colors.white)),
-                    ]),
-                    const SizedBox(height: 20),
                     if (_error != null) ...[
-                      Text(_error!,
-                          style: const TextStyle(color: Colors.white)),
+                      Text(_error!),
                       TextButton(
-                          onPressed: _load,
-                          child: const Text('Try again',
-                              style: TextStyle(color: Colors.white))),
+                          onPressed: _load, child: const Text('Try again'))
                     ] else if (pick == null)
-                      const CircularProgressIndicator(color: Colors.white)
+                      const CircularProgressIndicator()
                     else ...[
                       Text(pick.title,
-                          style: VisualTheme.display(30, color: Colors.white)),
-                      const SizedBox(height: 10),
+                          style: VisualTheme.heading(23,
+                              color: ink, w: FontWeight.w700)),
+                      const SizedBox(height: 8),
                       Text(pick.subtitle,
-                          style: VisualTheme.body(15, color: Colors.white)),
-                      const SizedBox(height: 24),
-                      SizedBox(
-                          width: double.infinity,
-                          child: FilledButton.icon(
-                              style: FilledButton.styleFrom(
-                                  backgroundColor: VisualTheme.apricot,
-                                  foregroundColor: VisualTheme.ink),
-                              onPressed: _start,
-                              icon: const Icon(Icons.play_arrow),
-                              label: const Text('Walk this session'))),
+                          style: VisualTheme.body(14, color: muted)),
+                      const SizedBox(height: 12),
+                      Text('${pick.minutes} MINUTES · FOUR GUIDED STOPS',
+                          style: VisualTheme.micro(9, color: accent)),
+                      const SizedBox(height: 18),
+                      FilledButton.icon(
+                          onPressed: _start,
+                          icon: const Icon(Icons.arrow_forward),
+                          label: const Text('Walk this session')),
                     ],
                   ])),
-          const SizedBox(height: 14),
-          LayoutBuilder(builder: (context, constraints) {
-            final tiles = [
-              _QuickTile(
-                  icon: Icons.equalizer,
-                  title: 'Four columns',
-                  detail: '4 phases · 4 rounds',
-                  tint: VisualTheme.sky,
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => BreathView(
-                          pattern: PracticeLibrary.patterns.first)))),
-              _QuickTile(
-                  icon: Icons.add_comment_outlined,
-                  title: 'Write in Tablet',
-                  detail: 'Keep a private signal',
-                  tint: VisualTheme.apricot,
-                  onTap: widget.onTablet),
-            ];
-            if (constraints.maxWidth < 330 ||
-                MediaQuery.textScalerOf(context).scale(1) > 1.2) {
-              return Column(children: [
-                for (final tile in tiles)
-                  Padding(
-                      padding: const EdgeInsets.only(bottom: 12), child: tile)
-              ]);
-            }
-            return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Expanded(child: tiles[0]),
-              const SizedBox(width: 12),
-              Expanded(child: tiles[1]),
-            ]);
-          }),
-          const SizedBox(height: 22),
-          Text('Your local rhythm', style: VisualTheme.heading(19, color: ink)),
-          const SizedBox(height: 12),
-          Wrap(spacing: 12, runSpacing: 12, children: [
-            _Metric(value: '$_streak', label: 'practice days'),
-            _Metric(value: '$_week', label: 'minutes this week'),
-          ]),
-          const SizedBox(height: 22),
-          Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color: VisualTheme.bayOf(context),
-                  borderRadius: BorderRadius.circular(24)),
+          _Station(
+              number: '02',
+              label: 'FOLLOW THE BREATH',
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('TODAY’S SIGNAL',
-                        style: VisualTheme.micro(10,
-                            color: VisualTheme.accentOf(context))),
-                    const SizedBox(height: 8),
-                    Text(PracticeEngine.lessonOfDay(DateTime.now()),
-                        style: VisualTheme.body(15, color: ink)),
+                    Text('Give the moment a rhythm.',
+                        style: VisualTheme.heading(20, color: ink)),
+                    const SizedBox(height: 10),
+                    for (final pattern in PracticeLibrary.patterns)
+                      ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(pattern.name),
+                          subtitle: Text('${pattern.rounds} rounds'),
+                          trailing: Icon(Icons.bar_chart, color: accent),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      BreathView(pattern: pattern)))),
                   ])),
-          const SizedBox(height: 18),
-          ExpansionTile(
-              tilePadding: EdgeInsets.zero,
-              title: const Text('More breathing rhythms'),
-              children: [
-                for (final pattern in PracticeLibrary.patterns.skip(1))
-                  ListTile(
-                      title: Text(pattern.name),
-                      subtitle: const Text('No breath holds'),
-                      trailing: const Icon(Icons.arrow_forward),
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => BreathView(pattern: pattern)))),
-              ]),
+          _Station(
+              number: '03',
+              label: 'LEAVE A TRACE',
+              last: true,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('What is worth remembering?',
+                        style: VisualTheme.heading(20, color: ink)),
+                    const SizedBox(height: 8),
+                    Text('Keep a few words in your private Tablet.',
+                        style: VisualTheme.body(14, color: muted)),
+                    if (widget.onTablet != null)
+                      TextButton.icon(
+                          onPressed: widget.onTablet,
+                          icon: const Icon(Icons.edit_outlined),
+                          label: const Text('Write in Tablet')),
+                  ])),
+          const Divider(height: 36),
+          Wrap(spacing: 20, runSpacing: 8, children: [
+            Text('$_streak practice days',
+                style: VisualTheme.body(13, color: muted)),
+            Text('$_week min this week',
+                style: VisualTheme.body(13, color: muted)),
+          ]),
           if (widget.onRange != null)
-            TextButton(
-                onPressed: widget.onRange, child: const Text('Explore Range')),
-          const SizedBox(height: 12),
+            Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: OutlinedButton.icon(
+                    onPressed: widget.onRange,
+                    icon: const Icon(Icons.map_outlined),
+                    label: const Text('Choose another route in Range'))),
+          const SizedBox(height: 20),
           Text('Private journal — fully offline. No account. No cloud.',
               style: VisualTheme.body(12, color: muted)),
         ]);
   }
 }
 
-class _QuickTile extends StatelessWidget {
-  final IconData icon;
-  final String title, detail;
-  final Color tint;
-  final VoidCallback? onTap;
-  const _QuickTile(
-      {required this.icon,
-      required this.title,
-      required this.detail,
-      required this.tint,
-      this.onTap});
+class _Station extends StatelessWidget {
+  final String number, label;
+  final Widget child;
+  final bool last;
+  const _Station(
+      {required this.number,
+      required this.label,
+      required this.child,
+      this.last = false});
   @override
-  Widget build(BuildContext context) => Material(
-      color: tint,
-      borderRadius: BorderRadius.circular(26),
-      child: InkWell(
-          borderRadius: BorderRadius.circular(26),
-          onTap: onTap,
-          child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(icon, color: VisualTheme.ink, size: 28),
-                    const SizedBox(height: 20),
-                    Text(title,
-                        style: VisualTheme.heading(18,
-                            color: VisualTheme.ink, w: FontWeight.w700)),
-                    const SizedBox(height: 5),
-                    Text(detail,
-                        style: VisualTheme.body(12, color: VisualTheme.ink)),
-                  ]))));
-}
-
-class _Metric extends StatelessWidget {
-  final String value, label;
-  const _Metric({required this.value, required this.label});
-  @override
-  Widget build(BuildContext context) =>
-      Row(mainAxisSize: MainAxisSize.min, children: [
-        Text(value,
-            style:
-                VisualTheme.display(30, color: VisualTheme.accentOf(context))),
-        const SizedBox(width: 8),
-        Text(label,
-            style: VisualTheme.body(12, color: VisualTheme.mutedOf(context))),
-      ]);
+  Widget build(BuildContext context) => IntrinsicHeight(
+          child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        SizedBox(
+            width: 32,
+            child: Column(children: [
+              Container(
+                  width: 30,
+                  height: 30,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: VisualTheme.accentOf(context))),
+                  child: Text(number,
+                      style: VisualTheme.micro(10,
+                          color: VisualTheme.accentOf(context)))),
+              if (!last)
+                Expanded(
+                    child: VerticalDivider(
+                        width: 1,
+                        color: VisualTheme.accentOf(context)
+                            .withValues(alpha: .3))),
+            ])),
+        const SizedBox(width: 16),
+        Expanded(
+            child: Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 7),
+                          child: Text(label,
+                              style: VisualTheme.micro(10,
+                                  color: VisualTheme.accentOf(context)))),
+                      const SizedBox(height: 12),
+                      child,
+                    ]))),
+      ]));
 }

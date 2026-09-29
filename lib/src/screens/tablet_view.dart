@@ -11,13 +11,19 @@ class TabletView extends StatefulWidget {
 }
 
 class _TabletViewState extends State<TabletView> {
+  final _search = TextEditingController();
   List<JournalEntry> _rows = [];
   String? _error;
-  String _filter = 'all';
   @override
   void initState() {
     super.initState();
     _load();
+  }
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
   }
 
   Future<void> _load() async {
@@ -37,14 +43,10 @@ class _TabletViewState extends State<TabletView> {
   }
 
   Future<void> _compose() async {
-    final saved = await showModalBottomSheet<bool>(
-        context: context,
-        isScrollControlled: true,
-        useSafeArea: true,
-        backgroundColor: VisualTheme.mistOf(context),
-        builder: (_) => const _NoteComposer());
+    final saved = await Navigator.of(context)
+        .push<bool>(MaterialPageRoute(builder: (_) => const NoteComposer()));
     if (!mounted || saved != true) return;
-    setState(() => _filter = 'all');
+    _search.clear();
     await _load();
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -55,99 +57,88 @@ class _TabletViewState extends State<TabletView> {
   @override
   Widget build(BuildContext context) {
     final ink = VisualTheme.inkOf(context),
-        muted = VisualTheme.mutedOf(context);
-    final rows =
-        _rows.where((r) => _filter == 'all' || r.mood == _filter).toList();
-    return ListView(padding: const EdgeInsets.all(20), children: [
-      Text('Keep a signal.', style: VisualTheme.display(32, color: ink)),
-      const SizedBox(height: 8),
+        muted = VisualTheme.mutedOf(context),
+        accent = VisualTheme.accentOf(context);
+    final query = _search.text.trim().toLowerCase();
+    final rows = _rows
+        .where((r) =>
+            '${r.body} ${r.prompt} ${r.mood}'.toLowerCase().contains(query))
+        .toList();
+    return ListView(padding: const EdgeInsets.all(24), children: [
+      Text('Traces of practice.', style: VisualTheme.display(36, color: ink)),
+      const SizedBox(height: 10),
       Text('Private journal — fully offline. No account. No cloud.',
           style: VisualTheme.body(14, color: muted)),
+      const SizedBox(height: 20),
+      FilledButton.icon(
+          onPressed: _compose,
+          icon: const Icon(Icons.edit_outlined),
+          label: const Text('New note')),
       const SizedBox(height: 22),
-      Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-              color: VisualTheme.sky, borderRadius: BorderRadius.circular(28)),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('${_rows.length} saved moments',
-                style: VisualTheme.heading(23,
-                    color: VisualTheme.ink, w: FontWeight.w700)),
-            const SizedBox(height: 8),
-            Text('A detail is enough. No perfect entry required.',
-                style: VisualTheme.body(14, color: VisualTheme.ink)),
-            const SizedBox(height: 18),
-            FilledButton.icon(
-                onPressed: _compose,
-                icon: const Icon(Icons.add),
-                label: const Text('New note')),
-          ])),
-      const SizedBox(height: 22),
-      SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(children: [
-            for (final mood in ['all', ...PracticeLibrary.moods])
-              Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                      label: Text(mood == 'all' ? 'All moments' : mood),
-                      selected: _filter == mood,
-                      onSelected: (_) => setState(() => _filter = mood))),
-          ])),
-      const SizedBox(height: 18),
+      TextField(
+          controller: _search,
+          onChanged: (_) => setState(() {}),
+          decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search), hintText: 'Search your notes')),
+      const SizedBox(height: 20),
+      Text('${rows.length} NOTES ON THIS DEVICE',
+          style: VisualTheme.micro(10, color: muted)),
+      const Divider(height: 28),
       if (_error != null) ...[
         Text(_error!),
-        TextButton(onPressed: _load, child: const Text('Try again')),
+        TextButton(onPressed: _load, child: const Text('Try again'))
       ],
       if (rows.isEmpty && _error == null)
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            child: Column(children: [
-              Icon(Icons.bubble_chart_outlined,
-                  size: 48, color: VisualTheme.accentOf(context)),
-              const SizedBox(height: 12),
-              Text(
-                  _rows.isEmpty
-                      ? 'Your first signal starts here.'
-                      : 'No moments with this feeling yet.',
-                  style: VisualTheme.body(15, color: muted)),
-            ])),
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Text(
+                _rows.isEmpty
+                    ? 'Leave your first trace. One sentence is enough.'
+                    : 'No notes match this search.',
+                style: VisualTheme.body(16, color: muted))),
       for (final row in rows)
-        Container(
-            margin: const EdgeInsets.only(bottom: 14),
-            padding: const EdgeInsets.all(22),
-            decoration: BoxDecoration(
-                color: VisualTheme.bayOf(context),
-                borderRadius: BorderRadius.circular(26)),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(children: [
-                Icon(Icons.circle,
-                    size: 9, color: VisualTheme.accentOf(context)),
-                const SizedBox(width: 8),
-                Expanded(
-                    child: Text(row.mood,
-                        style: VisualTheme.heading(13,
-                            color: VisualTheme.accentOf(context)))),
-                Text(row.createdAt.split('T').first,
-                    style: VisualTheme.body(11, color: muted)),
-              ]),
-              const SizedBox(height: 14),
-              Text(row.body, style: VisualTheme.body(16, color: ink)),
-              const Divider(height: 30),
-              Text(row.prompt, style: VisualTheme.body(12, color: muted)),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                  padding: const EdgeInsets.only(top: 5, right: 16),
+                  child: Icon(Icons.diamond_outlined, size: 18, color: accent)),
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text('${row.createdAt.split('T').first}  /  ${row.mood}',
+                        style: VisualTheme.micro(10, color: accent)),
+                    const SizedBox(height: 10),
+                    Text(row.body, style: VisualTheme.body(17, color: ink)),
+                    const SizedBox(height: 8),
+                    ExpansionTile(
+                        tilePadding: EdgeInsets.zero,
+                        title: Text('Reflection prompt',
+                            style: VisualTheme.body(12, color: muted)),
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: Text(row.prompt,
+                                      style:
+                                          VisualTheme.body(13, color: muted))))
+                        ]),
+                    const Divider(),
+                  ])),
             ])),
     ]);
   }
 }
 
-class _NoteComposer extends StatefulWidget {
-  const _NoteComposer();
+class NoteComposer extends StatefulWidget {
+  const NoteComposer({super.key});
   @override
-  State<_NoteComposer> createState() => _NoteComposerState();
+  State<NoteComposer> createState() => _NoteComposerState();
 }
 
-class _NoteComposerState extends State<_NoteComposer> {
+class _NoteComposerState extends State<NoteComposer> {
   final _controller = TextEditingController();
   int _prompt = 0;
   String _mood = PracticeLibrary.moods.first;
@@ -185,80 +176,65 @@ class _NoteComposerState extends State<_NoteComposer> {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context), ink = VisualTheme.inkOf(context);
-    return Padding(
-        padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
-        child: SizedBox(
-            height: (media.size.height -
-                    media.padding.top -
-                    media.viewInsets.bottom) *
-                .9,
+    final ink = VisualTheme.inkOf(context),
+        muted = VisualTheme.mutedOf(context);
+    return Scaffold(
+        appBar: AppBar(title: const Text('A new trace')),
+        body: SafeArea(
             child: Column(children: [
+          Expanded(
+              child: ListView(padding: const EdgeInsets.all(24), children: [
+            Text('A MOMENT TO REMEMBER',
+                style: VisualTheme.micro(10,
+                    color: VisualTheme.accentOf(context))),
+            const SizedBox(height: 18),
+            Text(PracticeLibrary.prompts[_prompt],
+                style: VisualTheme.display(28, color: ink)),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                    onPressed: _saving
+                        ? null
+                        : () => setState(() => _prompt =
+                            (_prompt + 1) % PracticeLibrary.prompts.length),
+                    child: const Text('Another prompt'))),
+            const Divider(height: 28),
+            TextField(
+                controller: _controller,
+                enabled: !_saving,
+                minLines: 6,
+                maxLines: 12,
+                decoration: const InputDecoration(
+                    labelText: 'Your note',
+                    hintText: 'Begin with one honest detail.')),
+            const SizedBox(height: 22),
+            Text('HOW DOES THIS MOMENT FEEL?',
+                style: VisualTheme.micro(10, color: muted)),
+            const SizedBox(height: 10),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final mood in PracticeLibrary.moods)
+                ChoiceChip(
+                    label: Text(mood),
+                    selected: _mood == mood,
+                    onSelected:
+                        _saving ? null : (_) => setState(() => _mood = mood)),
+            ]),
+            if (_error != null)
               Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 12, 12, 0),
-                  child: Row(children: [
-                    Expanded(
-                        child: Text('Capture a moment',
-                            style: VisualTheme.heading(23,
-                                color: ink, w: FontWeight.w700))),
-                    IconButton(
-                        tooltip: 'Close note',
-                        onPressed:
-                            _saving ? null : () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.close)),
-                  ])),
-              Expanded(
-                  child: ListView(
-                      padding: const EdgeInsets.fromLTRB(24, 16, 24, 12),
-                      children: [
-                    Text(PracticeLibrary.prompts[_prompt],
-                        style: VisualTheme.heading(18, color: ink)),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                            onPressed: _saving
-                                ? null
-                                : () => setState(() => _prompt = (_prompt + 1) %
-                                    PracticeLibrary.prompts.length),
-                            child: const Text('Another prompt'))),
-                    Wrap(spacing: 8, runSpacing: 6, children: [
-                      for (final mood in PracticeLibrary.moods)
-                        ChoiceChip(
-                            label: Text(mood),
-                            selected: _mood == mood,
-                            onSelected: _saving
-                                ? null
-                                : (_) => setState(() => _mood = mood)),
-                    ]),
-                    const SizedBox(height: 18),
-                    TextField(
-                        controller: _controller,
-                        enabled: !_saving,
-                        minLines: 4,
-                        maxLines: 8,
-                        decoration: const InputDecoration(
-                            labelText: 'Your note',
-                            hintText: 'One thing you noticed…')),
-                    if (_error != null)
-                      Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: Text(_error!)),
-                  ])),
-              SafeArea(
-                  top: false,
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
-                      child: SizedBox(
-                          width: double.infinity,
-                          child: ValueListenableBuilder<TextEditingValue>(
-                              valueListenable: _controller,
-                              builder: (context, value, _) => FilledButton(
-                                  onPressed:
-                                      _saving || value.text.trim().isEmpty
-                                          ? null
-                                          : _save,
-                                  child: Text(
-                                      _saving ? 'Saving…' : 'Save note')))))),
-            ])));
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(_error!)),
+          ])),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+              child: SizedBox(
+                  width: double.infinity,
+                  child: ValueListenableBuilder<TextEditingValue>(
+                      valueListenable: _controller,
+                      builder: (context, value, _) => FilledButton(
+                          onPressed: _saving || value.text.trim().isEmpty
+                              ? null
+                              : _save,
+                          child: Text(_saving ? 'Saving…' : 'Save note'))))),
+        ])));
   }
 }

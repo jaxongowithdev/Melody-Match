@@ -1,19 +1,19 @@
 import '../models/practice_models.dart';
 
 class PracticeLibrary {
-  static const moods = ['steady', 'lighter', 'tired', 'unchanged'];
+  static const moods = ['grounded', 'clear', 'quiet', 'unchanged'];
   static const prompts = [
-    'What caught your attention today?',
-    'Where did you use less effort?',
-    'What is complete for now?',
-    'Which small rhythm would you repeat?'
+    'What helped you arrive here?',
+    'Which detail would you keep from this practice?',
+    'Where could you use a little less effort?',
+    'What can you leave alone tonight?'
   ];
   static const patterns = <BreathPattern>[
     BreathPattern(
         id: 'four-columns',
         name: 'Four columns',
         teaching:
-            'Follow four even phases: inhale, pause, exhale, pause. The rising columns are a guide, not a target. Keep the breath comfortable. Stop or choose a no-hold rhythm if pauses feel uneasy.',
+            'Inhale, pause, exhale, pause: four even phases and four rounds. Follow the rising columns only while the rhythm feels comfortable. Choose a no-hold pattern or return to ordinary breathing whenever you need.',
         rounds: 4,
         phases: [
           BreathPhase(label: 'Inhale', seconds: 4),
@@ -22,20 +22,20 @@ class PracticeLibrary {
           BreathPhase(label: 'Pause empty', seconds: 4)
         ]),
     BreathPattern(
-        id: 'easy-current',
-        name: 'Easy current',
+        id: 'gentle-glow',
+        name: 'Gentle glow',
         teaching:
-            'Three counts in and four out, with no holds. Use a small, comfortable breath. Leave the count behind whenever you prefer.',
+            'Three counts in and four out, without holds. Keep the breath small and easy. Counting is optional, not a target to meet.',
         rounds: 6,
         phases: [
           BreathPhase(label: 'Inhale', seconds: 3),
           BreathPhase(label: 'Exhale', seconds: 4)
         ]),
     BreathPattern(
-        id: 'level-tide',
-        name: 'Level tide',
+        id: 'steady-lantern',
+        name: 'Steady lantern',
         teaching:
-            'Let four counts in meet four counts out. There are no pauses to hold. Return to ordinary breathing if counting feels like effort.',
+            'Four counts in, four counts out, with no pause to hold. Stop counting and breathe normally if the pattern requires effort.',
         rounds: 5,
         phases: [
           BreathPhase(label: 'Inhale', seconds: 4),
@@ -44,401 +44,373 @@ class PracticeLibrary {
   ];
   static const poses = <PoseCard>[
     PoseCard(
-        id: "sound-distance",
-        name: "Sound distance",
-        aka: "ATTENTION / LISTENING",
+        id: "texture-anchor",
+        name: "A texture anchor",
+        aka: "ATTENTION / TOUCH",
         setup:
-            "Listen for a nearby sound, then a farther one. Keep the head comfortable and let sounds arrive without searching.",
-        breath: "Breathe normally in the background.",
-        ifThis:
-            "If listening feels tiring, notice the contact of a foot instead."),
+            "Rest a hand on a comfortable surface and notice one quality without rubbing or testing.",
+        breath: "Let breathing remain natural and uncounted.",
+        ifThis: "Use a visible colour instead if touch is uncomfortable."),
     PoseCard(
-        id: "heel-lift",
-        name: "Seated heel lift",
-        aka: "MOVEMENT / FEET",
+        id: "tiny-orbit",
+        name: "A tiny orbit",
+        aka: "MOVEMENT / WRIST",
         setup:
-            "On a sturdy chair, keep the front of a foot on the floor and lift the heel slightly. Lower softly and rest.",
-        breath: "Let breathing continue without matching it to the movement.",
+            "Support the forearm and trace a small, painless circle with the hand. Rest after a few repetitions.",
+        breath: "Breathe in your own rhythm.",
         ifThis:
-            "Leave the foot still and notice its pressure if the movement is uncomfortable."),
+            "Keep the hand still if any part of the circle is uncomfortable."),
     PoseCard(
-        id: "finger-fan",
-        name: "Finger fan",
-        aka: "MOVEMENT / HANDS",
+        id: "foot-lift",
+        name: "A supported foot lift",
+        aka: "MOVEMENT / SEAT",
         setup:
-            "Support your forearm. Open the fingers a little, then return to their relaxed curve without squeezing.",
-        breath: "Use your natural rhythm; no breath holds.",
-        ifThis:
-            "Use a smaller motion or rest the hand if any joint feels strained."),
+            "Sit on a sturdy chair and lift one foot a little. Lower softly before changing sides.",
+        breath:
+            "Let the breath continue rather than holding it during the lift.",
+        ifThis: "Leave both feet down and alternate attention between them."),
     PoseCard(
-        id: "forward-reach",
-        name: "Low forward reach",
-        aka: "MOVEMENT / ARMS",
+        id: "quiet-marker",
+        name: "A quiet marker",
+        aka: "ATTENTION / RETURNING",
         setup:
-            "Sit with support and move one hand forward below shoulder height. Keep the elbow soft and return to your thigh.",
-        breath: "Keep breathing comfortably while you move.",
+            "Choose a contact point and silently say 'here' once when attention returns to it.",
+        breath: "No breath timing is needed.",
         ifThis:
-            "Imagine the movement with the hand resting if reaching is uncomfortable."),
+            "Omit the word and simply notice contact if words feel distracting."),
     PoseCard(
-        id: "day-closure",
-        name: "Day closure",
-        aka: "REST / REFLECTION",
+        id: "leave-one-thing",
+        name: "Leave one thing",
+        aka: "REST / EVENING",
         setup:
-            "Recall one ordinary action you completed today. Name it briefly, then return to the support beneath you.",
-        breath: "There is no breathing task to complete.",
+            "Choose one task you can stop considering for now. Return to the support of your chair or bed.",
+        breath: "Leave the breath alone.",
         ifThis:
-            "Skip the memory and listen to a quiet sound if reviewing the day feels unhelpful."),
+            "Skip the task and notice a quiet sound if reflection feels unhelpful."),
   ];
   static const sessions = <PracticeSession>[
     PracticeSession(
-        id: "sound-compass",
-        title: "Sound compass",
-        subtitle: "Listen nearby, then let the sound field widen.",
+        id: "texture-trail",
+        title: "Texture trail",
+        subtitle: "Let a familiar surface become an attention anchor.",
         kind: "sit",
         minutes: 8,
         level: "smooth",
+        aims: ["ease", "sit"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "ease",
-          "sit"
-        ],
+            "Let a familiar surface become an attention anchor. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Find a base",
+              title: "Choose a surface",
               cue:
-                  "Sit with your back comfortably supported. Keep your eyes open or closed. Notice one steady point of contact with the chair before listening.",
+                  "Sit comfortably and rest a hand on fabric, a table or your own sleeve. Use something ordinary, clean and comfortable to touch.",
               seconds: 120),
           PracticeStep(
-              title: "Listen nearby",
+              title: "Notice one quality",
               cue:
-                  "Notice a sound close to you. There is no need to identify its source. Listen for its beginning, texture and ending. If the room is quiet, notice the quiet.",
+                  "Without rubbing hard, notice whether the surface feels smooth, woven, cool or warm. A single word is enough; precise description is not required.",
               seconds: 120),
           PracticeStep(
-              title: "Widen the field",
+              title: "Change the point of contact",
               cue:
-                  "Allow a farther sound to enter attention. Move between near and far without turning your head or searching for a special sound.",
+                  "Move the hand a little and rest again. Notice whether the new contact feels different. Keep the arm supported and avoid repeatedly testing for a result.",
               seconds: 120),
           PracticeStep(
-              title: "Return without effort",
+              title: "Carry one detail",
               cue:
-                  "Let all sounds share the background. Feel the chair again. Choose one ordinary sound as a reminder that you can pause during the day.",
+                  "Let the hand rest naturally. Remember one detail, then let attention widen to the room. A small observation can be your whole practice.",
               seconds: 120),
         ]),
     PracticeSession(
-        id: "near-and-far",
-        title: "Near and far",
-        subtitle: "A gentle attention lesson using the space around you.",
+        id: "room-landmarks",
+        title: "Room landmarks",
+        subtitle: "Orient attention with three ordinary things around you.",
         kind: "sit",
         minutes: 8,
         level: "smooth",
+        aims: ["ease", "sit"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "ease",
-          "sit"
-        ],
+            "Orient attention with three ordinary things around you. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Choose two places",
+              title: "Meet the room",
               cue:
-                  "Sit in a comfortable position. Choose one object nearby and another farther away. Neither needs to be interesting. Avoid bright light.",
+                  "Find a supported seat and let your eyes rest. Pick a comfortable direction to look, avoiding glare or anything visually demanding.",
               seconds: 120),
           PracticeStep(
-              title: "Notice the near",
+              title: "Name a colour",
               cue:
-                  "Rest your gaze on the nearby object. Notice one colour and one shape. Blink normally. If looking is tiring, use the feel of a nearby surface instead.",
+                  "Notice one colour in the room. Let it be a simple fact rather than a judgement. You can use the colour of your clothing if that is easier.",
               seconds: 120),
           PracticeStep(
-              title: "Allow the far",
+              title: "Notice a line and a space",
               cue:
-                  "Let your gaze move to the farther object without straining. Notice the space between you and it. Alternate slowly only if that feels comfortable.",
+                  "Find one edge or line, then an open space nearby. Look softly and blink naturally. Stop looking closely if it feels tiring.",
               seconds: 120),
           PracticeStep(
-              title: "See the whole room",
+              title: "Return to where you are",
               cue:
-                  "Let your eyes take in a wider view. You do not need to study anything. Feel your feet and finish with an ordinary, uncounted breath.",
+                  "Feel the seat and the floor. Let the landmarks return to the background. You can use a single familiar object to orient yourself another time.",
               seconds: 120),
         ]),
     PracticeSession(
-        id: "heel-and-toe",
-        title: "Heel and toe",
-        subtitle: "Explore a small, seated change of foot pressure.",
+        id: "wrist-orbit",
+        title: "Wrist orbit",
+        subtitle: "Explore a tiny circle with the forearm supported.",
         kind: "mobility",
         minutes: 8,
         level: "smooth",
+        aims: ["stretch", "ease"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "stretch",
-          "ease"
-        ],
+            "Explore a tiny circle with the forearm supported. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Set up your seat",
+              title: "Support the forearm",
               cue:
-                  "Use a sturdy chair with both feet comfortably on the floor. Keep the chair still. If your feet do not reach, use a stable support.",
+                  "Place your forearm comfortably on a thigh or table, with the hand free to move. Keep the fingers relaxed and the shoulder easy.",
               seconds: 120),
           PracticeStep(
-              title: "A light heel lift",
+              title: "Trace a small circle",
               cue:
-                  "Keep the front of one foot down and lift the heel a little. Lower it softly. Repeat a few times, then rest. Stay within a painless range.",
+                  "Make a very small circle at the wrist. Keep the movement slow and painless. Rest after a few circles rather than trying to complete a target.",
               seconds: 120),
           PracticeStep(
-              title: "A light toe lift",
+              title: "Reverse or change hands",
               cue:
-                  "Keep the heel down and gently lift the front of the same foot. Lower it and rest. Change feet, keeping each motion small and unhurried.",
+                  "If comfortable, reverse the circle, then rest. Try the other hand. Reduce the range or leave a hand still if it feels strained.",
               seconds: 120),
           PracticeStep(
-              title: "Notice both feet",
+              title: "Rest both hands",
               cue:
-                  "Place both feet down. Compare the contact without judging it. Skip any movement that creates discomfort; quiet contact is also a complete practice.",
+                  "Support both hands and stop moving. Notice any difference in contact or effort. You may finish without feeling a change.",
               seconds: 120),
         ]),
     PracticeSession(
-        id: "hand-fan",
-        title: "Hand fan",
-        subtitle: "Alternate gentle opening and resting without squeezing.",
+        id: "seated-march",
+        title: "Seated march",
+        subtitle:
+            "Alternate a light foot lift while your chair does the supporting.",
         kind: "mobility",
         minutes: 12,
         level: "even",
+        aims: ["stretch", "ease"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "stretch",
-          "ease"
-        ],
+            "Alternate a light foot lift while your chair does the supporting. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Support the arms",
+              title: "Set a stable base",
               cue:
-                  "Place your forearms on your thighs or a table. Let the wrists remain comfortable and the shoulders easy. Begin with relaxed hands.",
+                  "Sit on a sturdy chair with both feet supported. Keep your hands on the chair or thighs if useful. Make sure there is clear floor space.",
+              seconds: 180),
+          PracticeStep(
+              title: "Lift one foot slightly",
+              cue:
+                  "Raise one foot just enough to reduce its contact with the floor, then lower it. Keep the body supported and avoid leaning backward.",
+              seconds: 180),
+          PracticeStep(
+              title: "Alternate with pauses",
+              cue:
+                  "Try the other foot. Alternate slowly, taking a rest between lifts. If lifting is uncomfortable, keep both feet down and simply notice each in turn.",
+              seconds: 180),
+          PracticeStep(
+              title: "Finish with stillness",
+              cue:
+                  "Place both feet comfortably down. Let the legs rest. Notice the support of the chair rather than trying to hold an ideal posture.",
+              seconds: 180),
+        ]),
+    PracticeSession(
+        id: "elbow-windows",
+        title: "Elbow windows",
+        subtitle:
+            "A small opening movement with hands resting on the shoulders.",
+        kind: "yoga",
+        minutes: 12,
+        level: "even",
+        aims: ["stretch"],
+        teaching:
+            "A small opening movement with hands resting on the shoulders. Use a comfortable position and stop whenever you need.",
+        steps: [
+          PracticeStep(
+              title: "Choose a comfortable position",
+              cue:
+                  "Sit with back support. If comfortable, rest fingertips on the same-side shoulders. Otherwise keep hands on thighs and imagine the movement.",
               seconds: 180),
           PracticeStep(
               title: "Open a little",
               cue:
-                  "Spread the fingers slightly, without pulling them straight. Let them return to their resting curve. Try only a few slow repetitions.",
+                  "Let the elbows move slightly outward, below any point of strain. Return to a comfortable position. There is no need to lift them high.",
               seconds: 180),
           PracticeStep(
-              title: "One hand, then the other",
+              title: "Explore one side",
               cue:
-                  "Open one hand while the other rests. Switch sides. Notice the difference in effort and reduce the movement if it becomes tiring.",
+                  "Move one elbow at a time through a smaller range. Keep the neck easy and let the breath continue naturally. Stop if there is discomfort.",
               seconds: 180),
           PracticeStep(
-              title: "Let the hands settle",
+              title: "Lower and release",
               cue:
-                  "Stop moving and support both hands. Notice temperature, contact or nothing in particular. There is no sensation you need to produce.",
+                  "Return hands to thighs and rest. Notice how the arms feel when supported. The resting part belongs to the lesson as much as the movement.",
               seconds: 180),
         ]),
     PracticeSession(
-        id: "side-space",
-        title: "Side space",
-        subtitle: "A supported seated reach with plenty of room to stop.",
+        id: "knee-glide",
+        title: "Knee glide",
+        subtitle: "Slide a foot gently while keeping your seat stable.",
         kind: "yoga",
         minutes: 12,
         level: "even",
+        aims: ["stretch", "ease"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "stretch"
-        ],
+            "Slide a foot gently while keeping your seat stable. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Sit comfortably",
+              title: "Prepare the floor",
               cue:
-                  "Sit on a stable chair, feet supported. Rest both hands on your thighs. Make sure there is space beside you and nothing to bump.",
+                  "Use a stable chair and a clear floor. Wear footwear that stays secure. Put both feet in a comfortable position beneath or slightly ahead of the knees.",
               seconds: 180),
           PracticeStep(
-              title: "Slide, do not pull",
+              title: "Slide a short distance",
               cue:
-                  "Let one hand slide a little toward the side of the thigh as your chest tips gently to that side. Return upright. Avoid leaning far or pulling on the chair.",
+                  "Slide one foot a little forward without locking the knee, then back. Keep the foot in contact with the floor and avoid forcing friction.",
               seconds: 180),
           PracticeStep(
-              title: "Try the other side",
+              title: "Change sides",
               cue:
-                  "Repeat a small motion to the other side. Breathe in your own rhythm. Keep your head comfortable and stop if the motion creates strain.",
+                  "Rest, then try the other foot. Keep the distance small and the pelvis supported. Skip the slide if the floor or clothing makes it awkward.",
               seconds: 180),
           PracticeStep(
-              title: "Meet the centre",
+              title: "Let both legs rest",
               cue:
-                  "Rest upright with support. Notice both sides of your body. A smaller motion, or simply imagining the motion while staying still, is enough.",
+                  "Return both feet to a supported position. Notice pressure beneath the feet. There is no goal of matching the two sides.",
               seconds: 180),
         ]),
     PracticeSession(
-        id: "grounded-reach",
-        title: "Grounded reach",
-        subtitle: "Move one arm forward while keeping the rest supported.",
-        kind: "yoga",
-        minutes: 12,
-        level: "even",
-        teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "stretch",
-          "ease"
-        ],
-        steps: [
-          PracticeStep(
-              title: "Arrange support",
-              cue:
-                  "Sit with feet supported and your back comfortable. Rest your hands on your thighs. Choose a clear area in front of you.",
-              seconds: 180),
-          PracticeStep(
-              title: "Reach below shoulder height",
-              cue:
-                  "Move one hand forward a little with a soft elbow, staying below shoulder height. Return it to your thigh. Do not lean to gain distance.",
-              seconds: 180),
-          PracticeStep(
-              title: "Alternate and rest",
-              cue:
-                  "Try the other hand, then pause with both hands down. Repeat at an easy pace. Keep breathing ordinary; omit a side if it feels uncomfortable.",
-              seconds: 180),
-          PracticeStep(
-              title: "End with contact",
-              cue:
-                  "Rest your hands and feel the support beneath you. Notice whether effort changes after stopping. You do not need to stretch farther next time.",
-              seconds: 180),
-        ]),
-    PracticeSession(
-        id: "breath-landmarks",
-        title: "Breath landmarks",
+        id: "breath-weather",
+        title: "Breath weather",
         subtitle:
-            "Notice a beginning and an ending without controlling either.",
+            "Observe the quality of a natural breath without adjusting it.",
         kind: "breath",
         minutes: 8,
         level: "smooth",
+        aims: ["ease", "sit"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "ease",
-          "sit"
-        ],
+            "Observe the quality of a natural breath without adjusting it. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Leave the breath alone",
+              title: "Begin with support",
               cue:
-                  "Find a comfortable supported position. Do not change the depth or timing of your breath. Notice a contact point to help you settle.",
+                  "Sit or lie down comfortably. Notice the support beneath you first. There is no need to deepen, slow or count the breath.",
               seconds: 120),
           PracticeStep(
-              title: "Notice a beginning",
+              title: "Choose a simple description",
               cue:
-                  "See if you can notice the beginning of an inhale. Let the rest happen by itself. If following breath is uncomfortable, follow a quiet sound instead.",
+                  "If comfortable, notice whether a breath feels smooth, uneven, light or ordinary. Treat the word as a passing observation, not an assessment.",
               seconds: 120),
           PracticeStep(
-              title: "Notice an ending",
+              title: "Let the next one differ",
               cue:
-                  "Notice where an exhale seems to finish. There is no need to pause, hold or count. Let the next breath arrive in its own time.",
+                  "Allow the next breaths to have their own qualities. Avoid checking every breath. Use contact with a surface instead if breath attention feels uncomfortable.",
               seconds: 120),
           PracticeStep(
-              title: "Release the landmarks",
+              title: "Drop the description",
               cue:
-                  "Stop tracking beginnings and endings. Feel the room around you and your body's support. Finish whenever you feel ready.",
+                  "Leave the words behind. Feel the body supported and allow breathing to remain in the background. Nothing needs correcting before you finish.",
               seconds: 120),
         ]),
     PracticeSession(
-        id: "single-task",
-        title: "One thing at a time",
+        id: "return-markers",
+        title: "Return markers",
         subtitle:
-            "Practice returning attention without turning it into a test.",
+            "Use a simple word to make returning attention less complicated.",
         kind: "sit",
         minutes: 18,
         level: "rough",
+        aims: ["sit", "ease"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "sit",
-          "ease"
-        ],
+            "Use a simple word to make returning attention less complicated. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Choose an ordinary anchor",
+              title: "Pick an anchor",
               cue:
-                  "Choose one quiet sound, an object or the contact of a foot. Settle into a position you can change whenever needed.",
+                  "Choose one stable contact point, such as your back against the chair. Adjust your position so you do not need to work hard to stay here.",
               seconds: 270),
           PracticeStep(
-              title: "Stay for a moment",
+              title: "Use a quiet marker",
               cue:
-                  "Notice one detail of your anchor, then another. Keep the effort light. You are exploring attention, not trying to keep the mind empty.",
+                  "When you notice the contact, silently say 'here' once. Let the word fade and notice the sensation without repeating the word constantly.",
               seconds: 270),
           PracticeStep(
-              title: "Recognize a detour",
+              title: "Welcome a return",
               cue:
-                  "When you notice a thought or distraction, silently name it 'a detour'. Return to the anchor once, gently. Wandering is not a failed repetition.",
+                  "If attention wanders, use 'here' once more and return to contact. There is no need to trace where your attention went or count the returns.",
               seconds: 270),
           PracticeStep(
-              title: "Bring it into the day",
+              title: "Leave the marker behind",
               cue:
-                  "Let attention widen again. Choose one everyday task to do with a little less hurry. You can return to one detail at any time.",
+                  "Stop using the word and let attention widen. Notice the room and move gently before continuing your day. Returning can be brief and ordinary.",
               seconds: 270),
         ]),
     PracticeSession(
-        id: "evening-inventory",
-        title: "Evening inventory",
-        subtitle: "Notice what is finished without planning the next day.",
+        id: "gentle-endings",
+        title: "Three gentle endings",
+        subtitle: "Close an evening reflection with three simple observations.",
         kind: "sleep",
         minutes: 12,
         level: "smooth",
+        aims: ["sleep", "ease"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "sleep",
-          "ease"
-        ],
+            "Close an evening reflection with three simple observations. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Find an evening position",
+              title: "Choose support",
               cue:
-                  "Sit or lie down with comfortable support. Adjust clothing, light or position if needed. No particular posture is required.",
+                  "Find a comfortable evening position. Let the eyes stay open or close naturally. Adjust light, clothing and support if needed.",
               seconds: 180),
           PracticeStep(
-              title: "Name one finished thing",
+              title: "Something received",
               cue:
-                  "Recall one ordinary action that is already complete: a meal, a message, a journey. Keep the memory brief and factual.",
+                  "Recall one ordinary thing you received today: water, food, help or a place to sit. No gratitude exercise is required; just acknowledge the fact.",
               seconds: 180),
           PracticeStep(
-              title: "Leave the next thing",
+              title: "Something given",
               cue:
-                  "If an unfinished task arrives, acknowledge it without solving it here. Return to the feeling of support. Planning can wait until you choose to resume.",
+                  "Recall one small action you offered, including care for yourself. Keep it brief. If nothing comes to mind, return to the feeling of support.",
               seconds: 180),
           PracticeStep(
-              title: "Close the inventory",
+              title: "Something left",
               cue:
-                  "Stop reviewing the day. Let sounds and contact come and go. You may end the session awake, drowsy or unchanged; all are acceptable.",
+                  "Name one thing you can leave alone for now. Stop reviewing the day and rest. The reflection does not need a tidy or positive conclusion.",
               seconds: 180),
         ]),
     PracticeSession(
-        id: "quiet-horizon",
-        title: "Quiet horizon",
-        subtitle:
-            "Let awareness move from the room toward comfortable support.",
+        id: "resting-outline",
+        title: "Resting outline",
+        subtitle: "Let broad body awareness become less detailed as you rest.",
         kind: "sleep",
         minutes: 18,
         level: "smooth",
+        aims: ["sleep"],
         teaching:
-            'Use a comfortable supported position. Follow each cue without forcing a sensation. Pause or stop whenever you need.',
-        aims: [
-          "sleep"
-        ],
+            "Let broad body awareness become less detailed as you rest. Use a comfortable position and stop whenever you need.",
         steps: [
           PracticeStep(
-              title: "Make a resting place",
+              title: "Arrange a resting place",
               cue:
-                  "Choose a supported position, seated or lying down. Let the eyes close only if comfortable. Keep breathing ordinary.",
+                  "Sit or lie down with comfortable support. Use a pillow or folded fabric if useful. Change position whenever needed.",
               seconds: 270),
           PracticeStep(
-              title: "Notice the room",
+              title: "Notice broad regions",
               cue:
-                  "Listen to the broad sound of the room. There is no need to follow individual sounds. Allow the room to exist without checking it.",
+                  "Notice the general presence of the legs, then the arms, without scanning every part. Keep attention light and avoid searching for a particular sensation.",
               seconds: 270),
           PracticeStep(
-              title: "Notice the support",
+              title: "Feel the whole outline",
               cue:
-                  "Bring attention to a broad area supported by the bed or chair. Let that contact be enough. Shift position whenever you need.",
+                  "Let awareness include the body as a whole. You do not need a clear image. If this feels effortful, listen to a neutral sound instead.",
               seconds: 270),
           PracticeStep(
-              title: "Let the practice fade",
+              title: "Release the outline",
               cue:
-                  "Release the task of noticing. Rest without waiting for a particular result. If you remain awake, simply end the lesson gently.",
+                  "Stop following any sequence. Rest in whatever position is comfortable. Falling asleep is not a task, and staying awake is not a failure.",
               seconds: 270),
         ]),
   ];

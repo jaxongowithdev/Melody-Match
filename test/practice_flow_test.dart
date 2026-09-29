@@ -13,20 +13,23 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         theme: VisualTheme.lightTheme,
         home: const Scaffold(body: RangeView())));
-    await tester.enterText(find.byType(TextField), 'heel and toe');
+    await tester.enterText(find.byType(TextField), 'wrist orbit');
     await tester.pumpAndSettle();
-    expect(find.text('Heel and toe'), findsOneWidget);
+    expect(find.text('Wrist orbit'), findsOneWidget);
     expect(find.text('1 PRACTICES'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'no-such-lesson');
     await tester.pumpAndSettle();
-    expect(
-        find.text('No matching practices. Try a different word or category.'),
+    expect(find.text('No matching practices. Try a different word.'),
         findsOneWidget);
     await tester.tap(find.text('Short lessons'));
-    await tester.enterText(find.byType(TextField), 'sound');
+    await tester.enterText(find.byType(TextField), 'texture');
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Sound distance'));
-    await tester.tap(find.text('Sound distance'));
+    await tester.ensureVisible(find.text('A texture anchor'));
+    await tester.tap(find.text('A texture anchor'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Open lesson'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Open lesson'));
     await tester.pumpAndSettle();
     expect(find.byType(PoseView), findsOneWidget);
     expect(find.text('SETUP'), findsOneWidget);

@@ -52,10 +52,10 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('ease', 'Reset'),
-                  ('sleep', 'Unwind'),
-                  ('stretch', 'Mobilize'),
-                  ('sit', 'Focus'),
+                  ('ease', 'Arrive'),
+                  ('sleep', 'Release'),
+                  ('stretch', 'Move'),
+                  ('sit', 'Attend'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -85,9 +85,9 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('smooth', 'Low tide'),
-                  ('even', 'Mid tide'),
-                  ('rough', 'Wide tide'),
+                  ('smooth', 'Gentle'),
+                  ('even', 'Measured'),
+                  ('rough', 'Unhurried'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -104,8 +104,8 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 8),
                 ...[
                   ('system', 'Match my device'),
-                  ('light', 'Day current'),
-                  ('dark', 'Night current'),
+                  ('light', 'Limestone'),
+                  ('dark', 'Ember night'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -115,12 +115,12 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  'Tideframe keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
+                  'Ember Atlas keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
                   style: VisualTheme.body(14, color: muted),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'TIDEFRAME  ·  OFFLINE BY DESIGN',
+                  'EMBER ATLAS  ·  OFFLINE BY DESIGN',
                   style: VisualTheme.micro(9, color: ink),
                 ),
               ],

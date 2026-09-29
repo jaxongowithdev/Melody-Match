@@ -27,11 +27,11 @@ void main() {
     expect(back.body, entry.body);
   });
 
-  test('preferences default to a light twelve-minute ease walk', () {
+  test('preferences default to a dark twelve-minute ease walk', () {
     final prefs = UserPreferences();
     expect(prefs.aspect, 'ease');
     expect(prefs.minutes, 12);
-    expect(prefs.theme, 'light');
+    expect(prefs.theme, 'dark');
     expect(prefs.showOnboarding, isTrue);
     expect(UserPreferences.fromMap(prefs.toMap()).grain, 'even');
   });

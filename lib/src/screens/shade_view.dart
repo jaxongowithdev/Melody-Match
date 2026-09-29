@@ -7,36 +7,29 @@ import 'session_player_view.dart';
 class ShadeView extends StatelessWidget {
   const ShadeView({super.key});
   @override
-  Widget build(BuildContext context) {
-    final rest =
-        PracticeLibrary.sessions.where((s) => s.kind == 'sleep').toList();
-    return ListView(padding: const EdgeInsets.all(20), children: [
-      Container(
-          padding: const EdgeInsets.all(28),
-          decoration: BoxDecoration(
-              color: VisualTheme.night,
-              borderRadius: BorderRadius.circular(30)),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Icon(Icons.nights_stay_outlined,
-                size: 38, color: VisualTheme.apricot),
-            const SizedBox(height: 24),
-            Text('Let the day\nrecede.',
-                style: VisualTheme.display(32, color: Colors.white)),
-            const SizedBox(height: 12),
-            Text(
-                'No finish line. No need to fall asleep. Find support and leave the next task for later.',
-                style: VisualTheme.body(15, color: VisualTheme.nightMuted)),
-          ])),
-      const SizedBox(height: 20),
-      for (final session in rest)
-        Padding(
-            padding: const EdgeInsets.only(bottom: 14),
-            child: BayCard(
-                session: session,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) =>
-                        SessionPlayerView(session: session, dim: true))))),
-    ]);
-  }
+  Widget build(BuildContext context) =>
+      ListView(padding: const EdgeInsets.all(24), children: [
+        Icon(Icons.nightlight_outlined,
+            size: 42, color: VisualTheme.accentOf(context)),
+        const SizedBox(height: 24),
+        Text('The last landmark\nis rest.',
+            style: VisualTheme.display(36, color: VisualTheme.inkOf(context))),
+        const SizedBox(height: 16),
+        Text(
+            'No need to resolve the day. These routes offer a comfortable ending, whether you feel sleepy or simply ready to stop.',
+            style: VisualTheme.body(16, color: VisualTheme.mutedOf(context))),
+        const Divider(height: 40),
+        for (final s
+            in PracticeLibrary.sessions.where((s) => s.kind == 'sleep'))
+          Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: BayCard(
+                  session: s,
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) =>
+                          SessionPlayerView(session: s, dim: true))))),
+        const SizedBox(height: 16),
+        Text('Rest is an invitation, not a result to produce.',
+            style: VisualTheme.body(14, color: VisualTheme.mutedOf(context))),
+      ]);
 }

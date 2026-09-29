@@ -108,140 +108,122 @@ class _SessionPlayerViewState extends State<SessionPlayerView> {
     final muted =
         widget.dim ? VisualTheme.nightMuted : VisualTheme.mutedOf(context);
     final accent =
-        widget.dim ? const Color(0xFFA4C4FF) : VisualTheme.accentOf(context);
+        widget.dim ? VisualTheme.apricot : VisualTheme.accentOf(context);
     return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-          backgroundColor: bg,
-          foregroundColor: ink,
-          title: Text(_session.title)),
-      body: SafeArea(
-          child: _done
-              ? ListView(padding: const EdgeInsets.all(24), children: [
-                  Icon(Icons.check_circle_outline, size: 64, color: accent),
-                  const SizedBox(height: 24),
-                  Text('Walk complete.',
-                      style: VisualTheme.display(32, color: ink)),
-                  const SizedBox(height: 12),
-                  Text(
-                      'Take one last check-in. Choose a feeling to save this practice on your device.',
-                      style: VisualTheme.body(16, color: muted)),
-                  const SizedBox(height: 28),
-                  Wrap(spacing: 8, runSpacing: 8, children: [
-                    for (final mood in PracticeLibrary.moods)
-                      FilledButton(
-                          onPressed: _saving ? null : () => _log(mood),
-                          child: Text(mood)),
-                  ]),
-                ])
-              : Column(children: [
-                  Expanded(
-                      child: ListView(
-                          padding: const EdgeInsets.fromLTRB(24, 12, 24, 16),
-                          children: [
-                        Center(
-                            child: SizedBox(
-                                width: 186,
-                                height: 186,
-                                child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      SizedBox.expand(
-                                          child: CircularProgressIndicator(
-                                              value:
-                                                  1 - _left / _current.seconds,
-                                              strokeWidth: 8,
-                                              backgroundColor:
-                                                  accent.withValues(alpha: .12),
-                                              color: accent)),
-                                      Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(_clock(_left),
-                                                style: VisualTheme.display(42,
-                                                    color: ink)),
-                                            Text(
-                                                _running
-                                                    ? 'IN PRACTICE'
-                                                    : 'READY WHEN YOU ARE',
-                                                style: VisualTheme.micro(9,
-                                                    color: muted)),
-                                          ]),
-                                    ]))),
-                        const SizedBox(height: 26),
-                        Row(children: [
-                          for (var i = 0; i < _session.steps.length; i++)
-                            Expanded(
-                                child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 4),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    decoration: BoxDecoration(
-                                        color: i == _step
-                                            ? accent
-                                            : accent.withValues(alpha: .1),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Text('${i + 1}',
-                                        textAlign: TextAlign.center,
-                                        style: VisualTheme.heading(14,
-                                            color: i == _step
-                                                ? (widget.dim
-                                                    ? VisualTheme.night
-                                                    : Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary)
-                                                : ink)))),
-                        ]),
-                        const SizedBox(height: 20),
-                        Container(
+        backgroundColor: bg,
+        appBar: AppBar(
+            backgroundColor: bg,
+            foregroundColor: ink,
+            title: Text(_session.title)),
+        body: SafeArea(
+            child: _done
+                ? ListView(padding: const EdgeInsets.all(24), children: [
+                    Icon(Icons.flag_outlined, size: 56, color: accent),
+                    const SizedBox(height: 24),
+                    Text('Walk complete.',
+                        style: VisualTheme.display(36, color: ink)),
+                    const SizedBox(height: 16),
+                    Text(
+                        'The route ends here. Choose a feeling to keep a local record of your practice.',
+                        style: VisualTheme.body(16, color: muted)),
+                    const SizedBox(height: 24),
+                    Wrap(spacing: 8, runSpacing: 8, children: [
+                      for (final mood in PracticeLibrary.moods)
+                        FilledButton(
+                            onPressed: _saving ? null : () => _log(mood),
+                            child: Text(mood)),
+                    ]),
+                  ])
+                : Column(children: [
+                    Expanded(
+                        child: ListView(
                             padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                                color: widget.dim
-                                    ? VisualTheme.nightBay
-                                    : VisualTheme.bayOf(context),
-                                borderRadius: BorderRadius.circular(28)),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      'STEP ${_step + 1} / ${_session.steps.length}',
-                                      style:
-                                          VisualTheme.micro(10, color: accent)),
-                                  const SizedBox(height: 10),
-                                  Text(_current.title,
-                                      style: VisualTheme.heading(25,
-                                          color: ink, w: FontWeight.w700)),
-                                  const SizedBox(height: 14),
-                                  Text(_current.cue,
-                                      style:
-                                          VisualTheme.body(17, color: muted)),
+                            children: [
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text('0${_step + 1}',
+                                    style:
+                                        VisualTheme.display(72, color: accent)),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                    child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 10),
+                                        child: Text('OF FOUR\nGUIDED STOPS',
+                                            style: VisualTheme.micro(10,
+                                                color: muted)))),
+                              ]),
+                          const Divider(height: 30),
+                          Text(_current.title,
+                              style: VisualTheme.display(32, color: ink)),
+                          const SizedBox(height: 20),
+                          Text(_current.cue,
+                              style: VisualTheme.body(18, color: ink)),
+                          const SizedBox(height: 28),
+                          Text('YOUR ROUTE',
+                              style: VisualTheme.micro(10, color: muted)),
+                          const SizedBox(height: 10),
+                          for (var i = 0; i < _session.steps.length; i++)
+                            Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 7),
+                                child: Row(children: [
+                                  Icon(
+                                      i < _step
+                                          ? Icons.check_circle_outline
+                                          : i == _step
+                                              ? Icons.radio_button_checked
+                                              : Icons.radio_button_unchecked,
+                                      size: 18,
+                                      color: i == _step ? accent : muted),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                      child: Text(_session.steps[i].title,
+                                          style: VisualTheme.body(13,
+                                              color:
+                                                  i == _step ? ink : muted))),
                                 ])),
-                      ])),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 12),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            FilledButton.icon(
-                                onPressed: _toggle,
-                                icon: Icon(
-                                    _running ? Icons.pause : Icons.play_arrow),
-                                label: Text(_running
-                                    ? 'Pause session'
-                                    : 'Start session')),
-                            TextButton(
-                                onPressed: () {
-                                  setState(() => _left = 1);
-                                  _tick();
-                                  _elapsed--;
-                                },
-                                child: Text(_step == _session.steps.length - 1
-                                    ? 'Finish practice'
-                                    : 'Next step')),
-                          ])),
-                ])),
-    );
+                        ])),
+                    Container(
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                        decoration: BoxDecoration(
+                            border: Border(
+                                top: BorderSide(
+                                    color: muted.withValues(alpha: .2)))),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(children: [
+                                Text(_clock(_left),
+                                    style: VisualTheme.display(30, color: ink)),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                    child: LinearProgressIndicator(
+                                        value: 1 - _left / _current.seconds,
+                                        color: accent,
+                                        backgroundColor:
+                                            accent.withValues(alpha: .12))),
+                              ]),
+                              const SizedBox(height: 12),
+                              FilledButton.icon(
+                                  onPressed: _toggle,
+                                  icon: Icon(_running
+                                      ? Icons.pause
+                                      : Icons.play_arrow),
+                                  label: Text(_running
+                                      ? 'Pause session'
+                                      : 'Start session')),
+                              TextButton(
+                                  onPressed: () {
+                                    setState(() => _left = 1);
+                                    _tick();
+                                    _elapsed--;
+                                  },
+                                  child: Text(_step == _session.steps.length - 1
+                                      ? 'Finish practice'
+                                      : 'Next step')),
+                            ])),
+                  ])));
   }
 }

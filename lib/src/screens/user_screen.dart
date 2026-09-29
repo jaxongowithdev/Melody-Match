@@ -39,11 +39,11 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Tideframe',
+        title: 'Ember Atlas',
         debugShowCheckedModeBanner: false,
         theme: VisualTheme.lightTheme,
         darkTheme: VisualTheme.darkTheme,
-        themeMode: switch (_prefs?.theme) {
+        themeMode: switch (_prefs?.theme ?? 'dark') {
           'dark' => ThemeMode.dark,
           'system' => ThemeMode.system,
           _ => ThemeMode.light
@@ -57,7 +57,7 @@ class _UserScreenState extends State<UserScreen> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   const FieldMark(),
                   const SizedBox(height: 24),
-                  Text(_error ?? 'Setting your rhythm…',
+                  Text(_error ?? 'Opening your atlas…',
                       textAlign: TextAlign.center),
                   if (_error != null)
                     TextButton(
@@ -107,18 +107,13 @@ class _WelcomeViewState extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
     final ink = VisualTheme.inkOf(context),
-        muted = VisualTheme.mutedOf(context);
+        muted = VisualTheme.mutedOf(context),
+        accent = VisualTheme.accentOf(context);
     final titles = [
-      'Make time for\nyour own rhythm.',
-      'Choose a direction.',
-      'Set your window.',
-      'Find your pace.'
-    ];
-    final subtitles = [
-      'Learn, breathe and reflect — entirely on your device.',
-      'Your choice shapes the recommended Walk.',
-      'Each lesson includes four guided steps.',
-      'Comfort matters more than intensity.'
+      'A practice you\ncan carry within.',
+      'Where will\nyou begin?',
+      'Make room\nfor a route.',
+      'Travel at\nyour own pace.'
     ];
     return Scaffold(
         body: SafeArea(
@@ -126,63 +121,58 @@ class _WelcomeViewState extends State<WelcomeView> {
       Padding(
           padding: const EdgeInsets.fromLTRB(24, 16, 24, 12),
           child: Row(children: [
-            const Icon(Icons.waves, color: VisualTheme.fuchsia),
-            const SizedBox(width: 10),
             Expanded(
-                child: Text('TIDEFRAME',
-                    style: VisualTheme.micro(12,
-                        color: VisualTheme.accentOf(context)))),
-            Text('${_page + 1} of 4',
-                style: VisualTheme.body(13, color: muted)),
+                child: Text('EMBER ATLAS',
+                    style: VisualTheme.micro(12, color: accent))),
+            Text('WELCOME / ${_page + 1}',
+                style: VisualTheme.micro(10, color: muted)),
           ])),
-      Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: LinearProgressIndicator(
-              value: (_page + 1) / 4,
-              minHeight: 5,
-              borderRadius: BorderRadius.circular(4))),
       Expanded(
           child: ListView(padding: const EdgeInsets.all(24), children: [
-        Text(titles[_page], style: VisualTheme.display(34, color: ink)),
-        const SizedBox(height: 12),
-        Text(subtitles[_page], style: VisualTheme.body(16, color: muted)),
-        const SizedBox(height: 24),
         if (_page == 0) ...[
-          Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                  color: VisualTheme.fuchsia,
-                  borderRadius: BorderRadius.circular(30)),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Center(
-                        child: Icon(Icons.waves,
-                            size: 64, color: VisualTheme.apricot)),
-                    const SizedBox(height: 20),
-                    Text('A teacher.\nNot another feed.',
-                        style: VisualTheme.display(27, color: Colors.white)),
-                    const SizedBox(height: 12),
-                    Text(
-                        'Walk through a lesson. Follow Four columns. Explore Range. Keep a note in Tablet.',
-                        style: VisualTheme.body(15, color: Colors.white)),
-                  ])),
-          const SizedBox(height: 18),
-          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Icon(Icons.lock_outline, color: VisualTheme.accentOf(context)),
-            const SizedBox(width: 10),
-            Expanded(
-                child: Text(
-                    'Private journal — fully offline.\nNo account. No cloud. No remote AI.',
-                    style: VisualTheme.body(14, color: muted))),
-          ]),
+          const Center(child: FieldMark(size: 125)),
+          const SizedBox(height: 24),
+        ],
+        Text(titles[_page], style: VisualTheme.display(38, color: ink)),
+        const SizedBox(height: 20),
+        if (_page == 0) ...[
+          Text(
+              'An offline teacher for small movements, steady attention and unhurried rest.',
+              style: VisualTheme.body(17, color: muted)),
+          const SizedBox(height: 24),
+          for (final line in [
+            ('01', 'Walk', 'Follow a four-step lesson at your own pace.'),
+            ('02', 'Four columns', 'Watch the breath rise, pause and fall.'),
+            ('03', 'Tablet', 'Leave a private trace of what you noticed.'),
+          ])
+            Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(line.$1,
+                          style: VisualTheme.micro(12, color: accent)),
+                      const SizedBox(width: 18),
+                      Expanded(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                            Text(line.$2,
+                                style: VisualTheme.heading(17, color: ink)),
+                            Text(line.$3,
+                                style: VisualTheme.body(14, color: muted)),
+                          ])),
+                    ])),
+          Text(
+              'No account. No cloud. No remote AI.\nAll teaching and journal entries stay on your device.',
+              style: VisualTheme.body(13, color: muted)),
         ],
         if (_page == 1)
           for (final c in [
-            ('ease', 'Reset', 'Switch from doing to sensing.'),
-            ('stretch', 'Mobilize', 'Explore small, supported movements.'),
-            ('sit', 'Focus', 'Learn to return to one ordinary detail.'),
-            ('sleep', 'Unwind', 'Put down the task of finishing everything.'),
+            ('ease', 'Arrive', 'Make contact with this moment.'),
+            ('stretch', 'Move', 'Try a comfortable supported motion.'),
+            ('sit', 'Attend', 'Learn to notice and return.'),
+            ('sleep', 'Release', 'Leave the day with less to carry.')
           ])
             _Choice(
                 label: c.$2,
@@ -194,21 +184,17 @@ class _WelcomeViewState extends State<WelcomeView> {
             _Choice(
                 label: '$m minutes',
                 detail: m == 8
-                    ? 'A compact reset.'
+                    ? 'A short route with a clear beginning.'
                     : m == 12
-                        ? 'A steady practice window.'
-                        : 'Room for a longer attention lesson.',
+                        ? 'Four stops with time to explore.'
+                        : 'A spacious attention or rest practice.',
                 selected: _minutes == m,
                 onTap: () => setState(() => _minutes = m)),
         if (_page == 3) ...[
           for (final c in [
-            ('smooth', 'Low tide', 'Simple cues and plenty of support.'),
-            ('even', 'Mid tide', 'A balanced lesson at an easy pace.'),
-            (
-              'rough',
-              'Wide tide',
-              'A longer space for noticing and returning.'
-            ),
+            ('smooth', 'Gentle', 'Simple cues with plenty of support.'),
+            ('even', 'Measured', 'An easy balance of movement and attention.'),
+            ('rough', 'Unhurried', 'Longer pauses for exploration.')
           ])
             _Choice(
                 label: c.$2,
@@ -216,20 +202,18 @@ class _WelcomeViewState extends State<WelcomeView> {
                 selected: _grain == c.$1,
                 onTap: () => setState(() => _grain = c.$1)),
           Text(
-              'No targets to chase. Keep movements and breathing comfortable. Pause or stop whenever you need.',
+              'Keep movement and breath comfortable. Every route allows you to pause, change position or stop.',
               style: VisualTheme.body(14, color: muted)),
         ],
       ])),
       Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 12),
           child: Row(children: [
-            if (_page > 0) ...[
+            if (_page > 0)
               IconButton(
                   tooltip: 'Previous step',
                   onPressed: _saving ? null : () => setState(() => _page--),
                   icon: const Icon(Icons.arrow_back)),
-              const SizedBox(width: 8),
-            ],
             Expanded(
                 child: FilledButton(
                     onPressed: _saving
@@ -246,6 +230,16 @@ class _WelcomeViewState extends State<WelcomeView> {
                         : _page < 3
                             ? 'Continue'
                             : 'Start my Walk'))),
+          ])),
+      Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            for (var i = 0; i < 4; i++)
+              Container(
+                  width: 32,
+                  height: 3,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  color: i <= _page ? accent : accent.withValues(alpha: .2)),
           ])),
     ])));
   }
@@ -267,14 +261,14 @@ class _Choice extends StatelessWidget {
           color: selected
               ? VisualTheme.accentOf(context).withValues(alpha: .12)
               : VisualTheme.bayOf(context),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(12),
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(12),
             child: Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                         color: selected
                             ? VisualTheme.accentOf(context)

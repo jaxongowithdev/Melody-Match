@@ -1,28 +1,31 @@
 APP NAME (max 30)
-Cadence Room
+Soft Margin
 
 SUBTITLE (max 30)
-Practice your everyday pauses
+A private offline teacher
 
 KEYWORDS (max 100)
-offline,breath,journal,focus,rest,movement,meditation,pause,mindfulness,relax,routine
+offline,journal,breath,meditation,rest,movement,attention,stretch,reflection,relax,practice
 
 PROMOTIONAL TEXT (max 170)
-Change the pace. Keep your centre. Guided sessions, rising-column breathing and a private recap journal — fully offline. No account. No cloud.
+Leave a little space for yourself. Guided practice, four rising breath columns and personal pages — fully offline. No account. No cloud.
 
 DESCRIPTION
-Cadence Room is a complete offline teacher for the pauses between everyday tasks. Learn small skills for resetting attention, moving comfortably and winding down. Ten original guided sessions, five skill cards and three breathing rhythms are included on your device. No account, no login, no cloud sync and no remote AI.
+Soft Margin is a complete offline teacher for comfortable movement, attention, breathing and rest. A warm-paper notebook with ten original guided practices, five short lessons and three breathing patterns. All teaching is included on your device. No account, no login, no cloud sync and no remote AI.
 
-BUILD YOUR DAILY MIX
-Complete a short onboarding: choose Reset, Loosen, Attend or Unwind, set 8, 12 or 18 minutes, and choose your energy level. Walk recommends a session using these preferences, the time of day and recent practice. Start a timer, pause when needed, move to the next step and save how you feel at the end.
+YOUR DAILY PAGE
+Complete onboarding by choosing Settle, Open, Notice or Rest, a practice window of 8, 12 or 18 minutes, and a comfortable pace. Walk offers a three-part path: make space with a guided session, follow an easy breathing rhythm, then leave a note in Tablet. Recommendations use your preferences, time of day and recent practice.
 
-PRACTICE A TRANSITION
-The arrival ritual, Screen intermission, Elbow room, Seated steps, Side space, Single channel, Gentle interval and Between two tasks offer written guidance for everyday breaks. Range lets you browse by category and study five short skill cards with setup, breathing and easier alternatives. Rest contains Closing shift and Quiet playback for an unhurried evening.
+TEN GUIDED PRACTICES
+Explore The weight of palms, Room around the jaw, Small shoulder arcs, The chair hinge, A quiet turn, Edge and centre, Patient breath and The unwritten page. Each practice has written teaching, four timed steps, pause and next-step controls. Rest offers Three enoughs and Resting layers for an unhurried evening.
 
-BREATH STUDIO
-Four columns guides four rounds of inhale, pause, exhale and pause with four rising meters. Steady tempo and Longer out offer rhythms without holds. See the current phase, countdown and round, and pause the exercise whenever you like.
+RANGE: THE CONTENTS
+Search practices and short lessons by name or description. Filter practices by category, or switch to Short lessons to study setup, breathing and a comfortable alternative. Choose your own lesson whenever you prefer.
 
-TABLET: YOUR PRIVATE RECAP
-Choose a prompt and mood, write a note and save it locally. Read dated recaps after reopening the app. Notes, preferences and practice history stay on this device. Private journal — fully offline. No account. No cloud.
+FOUR COLUMNS
+Four rising columns guide inhale, pause, exhale and pause. Open margin and Even lines offer patterns without holds. Read the method, start or pause, and follow the phase countdown and round number. Keep the breath comfortable and return to ordinary breathing whenever you need.
 
-A porcelain-and-cobalt interface, warm orange rhythm markers and Day studio or Night studio appearance make your next pause easy to find.
+TABLET: PERSONAL PAGES
+Choose a reflection prompt and mood, write a note and tap Save note. Your dated pages show the original prompt and your words. Notes, preferences and practice history are stored locally and remain available after reopening the app. Private journal — fully offline. No account. No cloud.
+
+Choose Warm paper or Evening ink appearance, or match your device. Your next page is always available without a network connection.

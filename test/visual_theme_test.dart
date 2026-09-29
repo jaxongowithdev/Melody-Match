@@ -17,8 +17,8 @@ void main() {
   });
 
   test('aspect labels are human', () {
-    expect(VisualTheme.aspectLabel('sleep'), 'Unwind');
-    expect(VisualTheme.aspectLabel('sit'), 'Attend');
-    expect(VisualTheme.aspectLabel('ease'), 'Reset');
+    expect(VisualTheme.aspectLabel('sleep'), 'Rest');
+    expect(VisualTheme.aspectLabel('sit'), 'Notice');
+    expect(VisualTheme.aspectLabel('ease'), 'Settle');
   });
 }

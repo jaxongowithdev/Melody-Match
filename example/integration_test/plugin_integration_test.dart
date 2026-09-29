@@ -10,7 +10,7 @@ import 'package:user_screen/src/screens/breath_view.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets(
-    'Cadence Room offline onboarding, Walk, breathing, Range and persistent Tablet',
+    'Soft Margin offline onboarding, Walk, breathing, Range and persistent Tablet',
     (tester) async {
       final storage = StorageManager.instance;
       await storage.savePreferences(UserPreferences());
@@ -65,11 +65,11 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Range'));
       await tester.pumpAndSettle();
-      expect(find.text('Pick your next pause.'), findsOneWidget);
+      expect(find.text('Choose a page\nto practice.'), findsOneWidget);
       await tester.tap(find.text('Tablet'));
       await tester.pumpAndSettle();
       final note =
-          'Cadence Room offline observation ${DateTime.now().millisecondsSinceEpoch}';
+          'Soft Margin offline observation ${DateTime.now().millisecondsSinceEpoch}';
       await tester.enterText(find.byType(TextField), note);
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Save note'));

@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../models/practice_models.dart';
 import '../utils/visual_theme.dart';
@@ -16,48 +15,19 @@ class StoaColon extends StatelessWidget {
   final ValueChanged<int> onSelect;
   const StoaColon({super.key, required this.index, required this.onSelect});
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 4, 20, 12),
-        child: Container(
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                color: VisualTheme.bayOf(context),
-                borderRadius: BorderRadius.circular(30)),
-            child: Row(children: [
-              for (final item in [
-                (0, 'Walk'),
-                (1, 'Range'),
-                (2, 'Rest'),
-                (3, 'Tablet')
-              ])
-                Expanded(
-                    child: Semantics(
-                        selected: item.$1 == index,
-                        button: true,
-                        child: InkWell(
-                            onTap: () => onSelect(item.$1),
-                            borderRadius: BorderRadius.circular(24),
-                            child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 180),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 13),
-                                decoration: BoxDecoration(
-                                    color: item.$1 == index
-                                        ? VisualTheme.accentOf(context)
-                                        : Colors.transparent,
-                                    borderRadius: BorderRadius.circular(24)),
-                                child: Text(item.$2,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w700,
-                                        color: item.$1 == index
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary
-                                            : VisualTheme.mutedOf(
-                                                context))))))),
-            ])),
+  Widget build(BuildContext context) => NavigationBar(
+        selectedIndex: index,
+        onDestinationSelected: onSelect,
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(Icons.route_outlined), label: 'Walk'),
+          NavigationDestination(
+              icon: Icon(Icons.auto_stories_outlined), label: 'Range'),
+          NavigationDestination(
+              icon: Icon(Icons.bedtime_outlined), label: 'Rest'),
+          NavigationDestination(
+              icon: Icon(Icons.edit_note_outlined), label: 'Tablet'),
+        ],
       );
 }
 
@@ -66,14 +36,14 @@ class StoaTitle extends StatelessWidget {
   const StoaTitle({super.key, this.trailing});
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 10, 12, 8),
+        padding: const EdgeInsets.fromLTRB(22, 8, 12, 8),
         child: Row(children: [
-          Icon(Icons.album_outlined,
-              color: VisualTheme.accentOf(context), size: 28),
-          const SizedBox(width: 10),
+          Icon(Icons.bookmark_outline,
+              size: 24, color: VisualTheme.accentOf(context)),
+          const SizedBox(width: 9),
           Expanded(
-              child: Text('cadence room',
-                  style: VisualTheme.heading(22,
+              child: Text('soft margin',
+                  style: VisualTheme.display(26,
                       color: VisualTheme.inkOf(context)))),
           if (trailing != null) trailing!,
         ]),
@@ -87,51 +57,44 @@ class BayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Material(
         color: VisualTheme.bayOf(context),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(24),
-          child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                              color: VisualTheme.kindTint(session.kind)
-                                  .withValues(alpha: .2),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Text(session.kind.toUpperCase(),
-                              style: VisualTheme.micro(10,
-                                  color: VisualTheme.inkOf(context)))),
-                      const Spacer(),
-                      Text('${session.minutes} min',
-                          style: VisualTheme.heading(13,
-                              color: VisualTheme.mutedOf(context))),
-                    ]),
-                    const SizedBox(height: 18),
-                    Row(children: [
-                      Expanded(
-                          child: Text(session.title,
-                              style: VisualTheme.display(27,
-                                  color: VisualTheme.inkOf(context)))),
-                      const SizedBox(width: 12),
-                      Icon(Icons.play_circle_outline,
-                          size: 36, color: VisualTheme.accentOf(context)),
-                    ]),
-                    const SizedBox(height: 8),
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    left: BorderSide(
+                        width: 5, color: VisualTheme.kindTint(session.kind)))),
+            padding: const EdgeInsets.all(18),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text(
+                        '${session.kind.toUpperCase()} · ${session.minutes} MIN',
+                        style: VisualTheme.micro(10,
+                            color: VisualTheme.mutedOf(context))),
+                    const SizedBox(height: 9),
+                    Text(session.title,
+                        style: VisualTheme.display(26,
+                            color: VisualTheme.inkOf(context))),
+                    const SizedBox(height: 7),
                     Text(session.subtitle,
                         style: VisualTheme.body(14,
                             color: VisualTheme.mutedOf(context))),
                   ])),
+              const SizedBox(width: 12),
+              Icon(Icons.arrow_outward,
+                  size: 21, color: VisualTheme.accentOf(context)),
+            ]),
+          ),
         ),
       );
 }
 
-/// A locally drawn rhythm disc, used in the app as its visual motif.
+/// Folded notebook illustration, drawn on-device.
 class FieldMark extends StatelessWidget {
   final double size;
   const FieldMark({super.key, this.size = 150});
@@ -139,35 +102,45 @@ class FieldMark extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(
       width: size,
       height: size,
-      child: CustomPaint(painter: _RhythmDisc(VisualTheme.accentOf(context))));
+      child: CustomPaint(painter: _FoldPainter(VisualTheme.accentOf(context))));
 }
 
-class _RhythmDisc extends CustomPainter {
+class _FoldPainter extends CustomPainter {
   final Color color;
-  _RhythmDisc(this.color);
+  _FoldPainter(this.color);
   @override
   void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = size.width * .07;
+    final w = size.width, h = size.height;
+    canvas.drawRRect(
+        RRect.fromRectAndRadius(
+            Rect.fromLTWH(w * .18, h * .12, w * .64, h * .76),
+            Radius.circular(w * .025)),
+        Paint()..color = color.withValues(alpha: .12));
+    final page = Path()
+      ..moveTo(w * .28, h * .06)
+      ..lineTo(w * .7, h * .06)
+      ..lineTo(w * .9, h * .26)
+      ..lineTo(w * .9, h * .79)
+      ..lineTo(w * .28, h * .91)
+      ..close();
+    canvas.drawPath(page, Paint()..color = color);
+    final fold = Path()
+      ..moveTo(w * .7, h * .06)
+      ..lineTo(w * .7, h * .26)
+      ..lineTo(w * .9, h * .26)
+      ..close();
+    canvas.drawPath(fold, Paint()..color = VisualTheme.apricot);
+    final rule = Paint()
+      ..color = Colors.white.withValues(alpha: .6)
+      ..strokeWidth = 2;
     for (var i = 0; i < 3; i++) {
-      canvas.drawArc(
-          Rect.fromCircle(
-              center: center, radius: size.width * (.43 - i * .115)),
-          .6,
-          math.pi * 2 - 1.2,
-          false,
-          paint);
+      canvas.drawLine(Offset(w * .4, h * (.42 + i * .1)),
+          Offset(w * .75, h * (.42 + i * .1)), rule);
     }
-    canvas.drawCircle(Offset(size.width * .84, size.height * .5),
-        size.width * .08, Paint()..color = VisualTheme.apricot);
   }
 
   @override
-  bool shouldRepaint(_RhythmDisc oldDelegate) => oldDelegate.color != color;
+  bool shouldRepaint(_FoldPainter oldDelegate) => oldDelegate.color != color;
 }
 
 class ColumnWalk extends StatelessWidget {
@@ -184,22 +157,21 @@ class ColumnWalk extends StatelessWidget {
           children: [
             for (var i = 0; i < 4; i++)
               SizedBox(
-                  width: 42,
+                  width: 40,
                   height: 200,
                   child: Stack(alignment: Alignment.bottomCenter, children: [
                     Container(
                         decoration: BoxDecoration(
-                            color: color.withValues(alpha: .07),
-                            borderRadius: BorderRadius.circular(24))),
+                            border:
+                                Border.all(color: color.withValues(alpha: .2)),
+                            borderRadius: BorderRadius.circular(4))),
                     AnimatedContainer(
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeInOut,
-                        height: 30 + t.clamp(0.0, 1.0) * 170,
+                        height: 24 + t.clamp(0.0, 1.0) * 176,
                         decoration: BoxDecoration(
-                            color: i == 3
-                                ? VisualTheme.apricot
-                                : color.withValues(alpha: 1 - i * .2),
-                            borderRadius: BorderRadius.circular(24))),
+                            color: color.withValues(alpha: 1 - i * .17),
+                            borderRadius: BorderRadius.circular(4))),
                   ])),
           ]));
 }

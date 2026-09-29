@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import '../database/storage_manager.dart';
+import '../data/library.dart';
 import '../models/practice_models.dart';
 import '../utils/visual_theme.dart';
 
@@ -129,12 +130,7 @@ class _SessionPlayerViewState extends State<SessionPlayerView> {
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      for (final m in [
-                        'settled',
-                        'awake',
-                        'tired',
-                        'unchanged'
-                      ])
+                      for (final m in PracticeLibrary.moods)
                         FilledButton(
                             onPressed: _saving ? null : () => _log(m),
                             child: Text(m)),

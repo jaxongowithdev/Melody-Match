@@ -39,7 +39,7 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Cadence Room',
+        title: 'Soft Margin',
         debugShowCheckedModeBanner: false,
         theme: VisualTheme.lightTheme,
         darkTheme: VisualTheme.darkTheme,
@@ -57,7 +57,7 @@ class _UserScreenState extends State<UserScreen> {
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   const FieldMark(),
                   const SizedBox(height: 24),
-                  Text(_error ?? 'Finding your rhythm…',
+                  Text(_error ?? 'Opening a fresh page…',
                       textAlign: TextAlign.center),
                   if (_error != null)
                     TextButton(
@@ -110,10 +110,10 @@ class _WelcomeViewState extends State<WelcomeView> {
         muted = VisualTheme.mutedOf(context),
         accent = VisualTheme.accentOf(context);
     final titles = [
-      'A better pause.\nA clearer next step.',
-      'What kind of\npause fits today?',
-      'Choose your\npractice length.',
-      'How much\nenergy is here?'
+      'A little space.\nJust for you.',
+      'What belongs\non today’s page?',
+      'How much time\ncan you keep?',
+      'Choose a\ncomfortable pace.'
     ];
     return Scaffold(
         body: SafeArea(
@@ -122,7 +122,7 @@ class _WelcomeViewState extends State<WelcomeView> {
           padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
           child: Row(children: [
             Expanded(
-                child: Text('CADENCE ROOM',
+                child: Text('SOFT MARGIN',
                     style: VisualTheme.micro(11, color: accent))),
             Text('0${_page + 1} / 04',
                 style: VisualTheme.micro(11, color: muted)),
@@ -150,26 +150,26 @@ class _WelcomeViewState extends State<WelcomeView> {
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
                       color: VisualTheme.bayOf(context),
-                      borderRadius: BorderRadius.circular(40)),
+                      borderRadius: BorderRadius.circular(8)),
                   child: const FieldMark(size: 100))),
         const SizedBox(height: 16),
         Text(titles[_page],
-            textAlign: TextAlign.center,
-            style: VisualTheme.display(34, color: ink)),
+            textAlign: TextAlign.left,
+            style: VisualTheme.display(40, color: ink)),
         const SizedBox(height: 20),
         if (_page == 0) ...[
           Text(
-              'Build small skills for the spaces between tasks. Movement, breathing and reflection, guided entirely on your device.',
+              'An offline teacher for movement, attention and rest. Follow a lesson, find an easy breath, and keep a private note.',
               style: VisualTheme.body(17, color: muted)),
           const SizedBox(height: 24),
           const _IntroLine(
               icon: Icons.explore_outlined,
               title: 'Walk',
-              detail: 'Your daily session, arranged as a simple sequence.'),
+              detail: 'A guided lesson in four clear steps.'),
           const _IntroLine(
               icon: Icons.air,
               title: 'Four columns',
-              detail: 'Four rising meters. One comfortable breathing rhythm.'),
+              detail: 'Follow the rise, the pause and the release.'),
           const _IntroLine(
               icon: Icons.lock_outline,
               title: 'Private by design',
@@ -180,22 +180,14 @@ class _WelcomeViewState extends State<WelcomeView> {
               style: VisualTheme.body(15, color: muted)),
           const SizedBox(height: 20),
           for (final choice in [
-            (
-              'ease',
-              'Reset',
-              'Make a clean transition between one task and the next.'
-            ),
+            ('ease', 'Settle', 'Begin with support and simple sensations.'),
             (
               'stretch',
-              'Loosen',
-              'Explore small, seated movements at your own pace.'
+              'Open',
+              'Make a little room with easy, supported movement.'
             ),
-            (
-              'sit',
-              'Attend',
-              'Practice choosing one thing and gently returning to it.'
-            ),
-            ('sleep', 'Unwind', 'Ease out of doing and into a quieter evening.')
+            ('sit', 'Notice', 'Explore what is here without trying to fix it.'),
+            ('sleep', 'Rest', 'Leave some of the day unfinished and rest.')
           ])
             _Choice(
                 label: choice.$2,
@@ -208,17 +200,21 @@ class _WelcomeViewState extends State<WelcomeView> {
             _Choice(
                 label: '$m minutes',
                 detail: m == 8
-                    ? 'A quick change of pace.'
+                    ? 'A short page of practice.'
                     : m == 12
-                        ? 'A complete everyday practice.'
-                        : 'An extended pause with room to settle.',
+                        ? 'Space to learn and settle.'
+                        : 'A longer lesson without hurry.',
                 selected: _minutes == m,
                 onTap: () => setState(() => _minutes = m)),
         if (_page == 3) ...[
           for (final choice in [
-            ('smooth', 'Low', 'Keep the practice easy and supported.'),
-            ('even', 'Balanced', 'A little movement, a little quiet.'),
-            ('rough', 'Plenty', 'Stay longer with an attention exercise.')
+            ('smooth', 'Soft', 'Simple, supported lessons.'),
+            (
+              'even',
+              'Steady',
+              'A comfortable balance of movement and attention.'
+            ),
+            ('rough', 'Spacious', 'More time to explore an attention lesson.')
           ])
             _Choice(
                 label: choice.$2,
@@ -301,14 +297,14 @@ class _Choice extends StatelessWidget {
           color: selected
               ? VisualTheme.accentOf(context).withValues(alpha: .12)
               : VisualTheme.bayOf(context),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(8),
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(8),
             child: Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                         color: selected
                             ? VisualTheme.accentOf(context)

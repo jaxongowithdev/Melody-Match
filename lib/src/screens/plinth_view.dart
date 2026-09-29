@@ -39,7 +39,7 @@ class _PlinthViewState extends State<PlinthView> {
     final ink = VisualTheme.inkOf(context);
     final muted = VisualTheme.mutedOf(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Your practice mix')),
+      appBar: AppBar(title: const Text('Your preferences')),
       body: prefs == null
           ? const Center(child: CircularProgressIndicator())
           : ListView(
@@ -52,10 +52,10 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('ease', 'Reset'),
-                  ('sleep', 'Unwind'),
-                  ('stretch', 'Loosen'),
-                  ('sit', 'Attend'),
+                  ('ease', 'Settle'),
+                  ('sleep', 'Rest'),
+                  ('stretch', 'Open'),
+                  ('sit', 'Notice'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -85,9 +85,9 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('smooth', 'Low'),
-                  ('even', 'Balanced'),
-                  ('rough', 'Plenty'),
+                  ('smooth', 'Soft'),
+                  ('even', 'Steady'),
+                  ('rough', 'Spacious'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -104,8 +104,8 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 8),
                 ...[
                   ('system', 'Match my device'),
-                  ('light', 'Day studio'),
-                  ('dark', 'Night studio'),
+                  ('light', 'Warm paper'),
+                  ('dark', 'Evening ink'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -115,12 +115,12 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  'Cadence Room keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
+                  'Soft Margin keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
                   style: VisualTheme.body(14, color: muted),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'CADENCE ROOM  ·  OFFLINE BY DESIGN',
+                  'SOFT MARGIN  ·  OFFLINE BY DESIGN',
                   style: VisualTheme.micro(9, color: ink),
                 ),
               ],

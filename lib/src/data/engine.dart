@@ -51,13 +51,13 @@ class PracticeEngine {
 
   static String lessonOfDay(DateTime now) {
     const lessons = [
-      'Give one task an ending before asking the next task to begin.',
-      'Try an easier range. Comfort is useful information, not a compromise.',
-      'A pause does not need to be silent to be worthwhile.',
-      'Eight minutes is enough to practice one small skill.',
-      'Notice when effort has finished its job. Let a little of it go.',
-      'Choose one next action instead of rehearsing the entire day.',
-      'An ordinary breath can mark a fresh beginning.',
+      'Noticing is already an action. You do not have to change what you find.',
+      'Leave a margin around a busy moment. Begin with one point of support.',
+      'A comfortable range teaches more than a forced one.',
+      'Write one detail, not the whole day. A short note can hold a real discovery.',
+      'Attention can return as often as it needs. Each return belongs here.',
+      'Let the breath be ordinary. The lesson is in noticing it.',
+      'Some pages can stay unfinished. Rest does not require a perfect ending.',
     ];
     return lessons[now.day % lessons.length];
   }

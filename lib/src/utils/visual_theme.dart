@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-/// Cadence Room: porcelain, cobalt rhythm cards and tangerine markers.
+/// Soft Margin: warm paper, oxblood ink, folded edges and notebook rules.
 class VisualTheme {
-  static const mist = Color(0xFFF2F4FB),
-      bay = Color(0xFFFFFFFF),
-      pewter = Color(0xFF7D93C0),
-      ink = Color(0xFF172B54),
-      fuchsia = Color(0xFF3458DB),
-      muted = Color(0xFF61708D),
-      rule = Color(0xFFDCE2F0),
-      sky = Color(0xFFDCE5FF),
-      apricot = Color(0xFFEC8154);
-  static const night = Color(0xFF131C32),
-      nightBay = Color(0xFF202D48),
-      nightInk = Color(0xFFF0F3FD),
-      nightMuted = Color(0xFFB8C4E0);
+  static const mist = Color(0xFFF5EBDD),
+      bay = Color(0xFFFFFBF5),
+      pewter = Color(0xFF9B806F),
+      ink = Color(0xFF392B2E),
+      fuchsia = Color(0xFF9B413B),
+      muted = Color(0xFF786760),
+      rule = Color(0xFFE0CEC0),
+      sky = Color(0xFFF0DACA),
+      apricot = Color(0xFFC18C42);
+  static const night = Color(0xFF261E22),
+      nightBay = Color(0xFF37292D),
+      nightInk = Color(0xFFF8EDDF),
+      nightMuted = Color(0xFFCDB8AE);
   static bool isDark(BuildContext c) =>
       Theme.of(c).brightness == Brightness.dark;
   static Color bayOf(BuildContext c) => isDark(c) ? nightBay : bay;
@@ -22,11 +22,11 @@ class VisualTheme {
   static Color inkOf(BuildContext c) => isDark(c) ? nightInk : ink;
   static Color mutedOf(BuildContext c) => isDark(c) ? nightMuted : muted;
   static Color accentOf(BuildContext c) =>
-      isDark(c) ? const Color(0xFFA9BBFF) : fuchsia;
+      isDark(c) ? const Color(0xFFE5A69D) : fuchsia;
   static TextStyle display(double s,
-          {Color? color, FontWeight w = FontWeight.w700}) =>
+          {Color? color, FontWeight w = FontWeight.w400}) =>
       TextStyle(
-          fontFamily: 'sans-serif',
+          fontFamily: 'Georgia',
           fontSize: s,
           fontWeight: w,
           height: 1.12,
@@ -53,14 +53,14 @@ class VisualTheme {
     final dark = brightness == Brightness.dark;
     final surface = dark ? nightBay : bay;
     final text = dark ? nightInk : ink;
-    final primary = dark ? const Color(0xFFA9BBFF) : fuchsia;
+    final primary = dark ? const Color(0xFFE5A69D) : fuchsia;
     final scheme = ColorScheme.fromSeed(
         seedColor: primary,
         brightness: brightness,
         primary: primary,
         onPrimary: dark ? ink : Colors.white,
         surface: surface);
-    const radius = BorderRadius.all(Radius.circular(24));
+    const radius = BorderRadius.all(Radius.circular(8));
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
@@ -106,17 +106,17 @@ class VisualTheme {
       grains = ['smooth', 'even', 'rough'],
       minuteChoices = [8, 12, 18];
   static String aspectLabel(String a) => switch (a) {
-        'sleep' => 'Unwind',
-        'stretch' => 'Loosen',
-        'sit' => 'Attend',
-        _ => 'Reset'
+        'sleep' => 'Rest',
+        'stretch' => 'Open',
+        'sit' => 'Notice',
+        _ => 'Settle'
       };
   static Color kindTint(String k) => switch (k) {
-        'yoga' => const Color(0xFF9AB1F2),
-        'breath' => const Color(0xFF78B5CC),
-        'sleep' => const Color(0xFFB5A0DC),
-        'sit' => const Color(0xFFE5B17B),
-        'mobility' => const Color(0xFF98C4B0),
+        'yoga' => const Color(0xFFC4A48A),
+        'breath' => const Color(0xFFABBCB5),
+        'sleep' => const Color(0xFFB4A3BB),
+        'sit' => const Color(0xFFD3B77D),
+        'mobility' => const Color(0xFFD29988),
         _ => pewter
       };
 }

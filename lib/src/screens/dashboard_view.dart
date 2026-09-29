@@ -19,29 +19,28 @@ class DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
-            bottom: false,
             child: Column(children: [
-              StoaTitle(
-                  trailing: IconButton(
-                      tooltip: 'Practice settings',
-                      icon: const Icon(Icons.tune),
-                      onPressed: () async {
-                        await Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => PlinthView(
-                                onPrefsChanged: widget.onPrefsChanged)));
-                        if (mounted) setState(() => _revision++);
-                      })),
-              Expanded(
-                  child: IndexedStack(index: _index, children: [
-                WalkView(
-                    key: ValueKey(_revision),
-                    onRange: () => _select(1),
-                    onTablet: () => _select(3)),
-                const RangeView(),
-                const ShadeView(),
-                const TabletView(),
-              ])),
-            ])),
-        bottomNavigationBar: StoaColon(index: _index, onSelect: _select),
+          StoaTitle(
+              trailing: IconButton(
+                  tooltip: 'Practice settings',
+                  icon: const Icon(Icons.tune),
+                  onPressed: () async {
+                    await Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) =>
+                            PlinthView(onPrefsChanged: widget.onPrefsChanged)));
+                    if (mounted) setState(() => _revision++);
+                  })),
+          StoaColon(index: _index, onSelect: _select),
+          Expanded(
+              child: IndexedStack(index: _index, children: [
+            WalkView(
+                key: ValueKey(_revision),
+                onRange: () => _select(1),
+                onTablet: () => _select(3)),
+            const RangeView(),
+            const ShadeView(),
+            const TabletView(),
+          ])),
+        ])),
       );
 }

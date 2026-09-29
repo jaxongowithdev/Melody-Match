@@ -30,7 +30,7 @@ class PracticeEngine {
     if (s.aims.contains(prefs.aspect)) n += 5;
     if (s.level == prefs.grain) n += 3;
     if ((s.minutes - prefs.minutes).abs() <= 2) n += 2;
-    if (hour < 11 && s.id.contains('morning')) n += 3;
+    if (hour < 11 && (s.kind == 'sit' || s.kind == 'breath')) n += 3;
     if (hour >= 20 && (s.kind == 'sleep' || s.aims.contains('sleep'))) n += 4;
     if (hour >= 11 && hour < 17 && s.kind == 'mobility') n += 3;
     if (prefs.aspect == 'sleep' && s.kind == 'sleep') n += 4;
@@ -51,13 +51,13 @@ class PracticeEngine {
 
   static String lessonOfDay(DateTime now) {
     const lessons = [
-      'Noticing is already an action. You do not have to change what you find.',
-      'Leave a margin around a busy moment. Begin with one point of support.',
-      'A comfortable range teaches more than a forced one.',
-      'Write one detail, not the whole day. A short note can hold a real discovery.',
-      'Attention can return as often as it needs. Each return belongs here.',
-      'Let the breath be ordinary. The lesson is in noticing it.',
-      'Some pages can stay unfinished. Rest does not require a perfect ending.',
+      'Try listening to one sound before reaching for the next task.',
+      'A smaller movement still gives you something to notice.',
+      'Let the count support your breathing, never force it.',
+      'You can change position before discomfort becomes a distraction.',
+      'An ordinary detail is enough to bring attention back.',
+      'A completed practice can feel quiet, lively or unchanged.',
+      'Leave one finished thing finished. You do not need to improve it tonight.',
     ];
     return lessons[now.day % lessons.length];
   }

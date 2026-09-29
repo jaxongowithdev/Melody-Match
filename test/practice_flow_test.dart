@@ -13,9 +13,9 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         theme: VisualTheme.lightTheme,
         home: const Scaffold(body: RangeView())));
-    await tester.enterText(find.byType(TextField), 'chair hinge');
+    await tester.enterText(find.byType(TextField), 'heel and toe');
     await tester.pumpAndSettle();
-    expect(find.text('The chair hinge'), findsOneWidget);
+    expect(find.text('Heel and toe'), findsOneWidget);
     expect(find.text('1 PRACTICES'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'no-such-lesson');
     await tester.pumpAndSettle();
@@ -23,10 +23,10 @@ void main() {
         find.text('No matching practices. Try a different word or category.'),
         findsOneWidget);
     await tester.tap(find.text('Short lessons'));
-    await tester.enterText(find.byType(TextField), 'palm');
+    await tester.enterText(find.byType(TextField), 'sound');
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Resting palm'));
-    await tester.tap(find.text('Resting palm'));
+    await tester.ensureVisible(find.text('Sound distance'));
+    await tester.tap(find.text('Sound distance'));
     await tester.pumpAndSettle();
     expect(find.byType(PoseView), findsOneWidget);
     expect(find.text('SETUP'), findsOneWidget);

@@ -1,5 +1,5 @@
-name: soft_margin_example
-description: "Soft Margin - Private offline movement and rest teacher"
+name: tideframe_example
+description: "Tideframe - Private offline movement and rest teacher"
 publish_to: 'none'
 version: 1.9.0+1
 environment:

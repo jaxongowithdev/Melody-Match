@@ -52,10 +52,10 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('ease', 'Settle'),
-                  ('sleep', 'Rest'),
-                  ('stretch', 'Open'),
-                  ('sit', 'Notice'),
+                  ('ease', 'Reset'),
+                  ('sleep', 'Unwind'),
+                  ('stretch', 'Mobilize'),
+                  ('sit', 'Focus'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -85,9 +85,9 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 8),
                 ...[
-                  ('smooth', 'Soft'),
-                  ('even', 'Steady'),
-                  ('rough', 'Spacious'),
+                  ('smooth', 'Low tide'),
+                  ('even', 'Mid tide'),
+                  ('rough', 'Wide tide'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -104,8 +104,8 @@ class _PlinthViewState extends State<PlinthView> {
                 const SizedBox(height: 8),
                 ...[
                   ('system', 'Match my device'),
-                  ('light', 'Warm paper'),
-                  ('dark', 'Evening ink'),
+                  ('light', 'Day current'),
+                  ('dark', 'Night current'),
                 ].map(
                   (g) => _Pick(
                     label: g.$2,
@@ -115,12 +115,12 @@ class _PlinthViewState extends State<PlinthView> {
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  'Soft Margin keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
+                  'Tideframe keeps your preferences, practice history and notes on this device. There is no account, login, cloud sync or remote AI.',
                   style: VisualTheme.body(14, color: muted),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'SOFT MARGIN  ·  OFFLINE BY DESIGN',
+                  'TIDEFRAME  ·  OFFLINE BY DESIGN',
                   style: VisualTheme.micro(9, color: ink),
                 ),
               ],

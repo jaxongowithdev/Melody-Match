@@ -6,11 +6,12 @@ import 'package:user_screen/src/database/storage_manager.dart';
 import 'package:user_screen/src/models/user_preferences.dart';
 import 'package:user_screen/src/screens/session_player_view.dart';
 import 'package:user_screen/src/screens/breath_view.dart';
+import 'package:user_screen/src/screens/tablet_view.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets(
-    'Soft Margin offline onboarding, Walk, breathing, Range and persistent Tablet',
+    'Tideframe offline onboarding, Walk, breathing, Range and persistent Tablet',
     (tester) async {
       final storage = StorageManager.instance;
       await storage.savePreferences(UserPreferences());
@@ -46,7 +47,7 @@ void main() {
       await tester.ensureVisible(find.text('Finish practice'));
       await tester.tap(find.text('Finish practice'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('settled'));
+      await tester.tap(find.text('steady'));
       await waitFor(find.text('Walk this session'));
       expect((await storage.recentLogs()).isNotEmpty, isTrue);
       await tester.scrollUntilVisible(
@@ -65,17 +66,34 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Range'));
       await tester.pumpAndSettle();
-      expect(find.text('Choose a page\nto practice.'), findsOneWidget);
+      expect(find.text('Explore your range.'), findsOneWidget);
       await tester.tap(find.text('Tablet'));
       await tester.pumpAndSettle();
+      await tester.tap(find.text('New note'));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, 'Save note'),
+            )
+            .onPressed,
+        isNull,
+      );
+      await tester.tap(find.text('Another prompt'));
+      await tester.tap(find.text('lighter').last);
       final note =
-          'Soft Margin offline observation ${DateTime.now().millisecondsSinceEpoch}';
+          'Tideframe offline observation ${DateTime.now().millisecondsSinceEpoch}';
       await tester.enterText(find.byType(TextField), note);
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Save note'));
       await tester.tap(find.text('Save note'));
       await waitFor(find.text('Note saved on this device.'));
       expect((await storage.allJournal()).any((e) => e.body == note), isTrue);
+      await tester.tap(find.text('steady'));
+      await tester.pumpAndSettle();
+      expect(find.text(note), findsNothing);
+      await tester.tap(find.text('All moments'));
+      await tester.pumpAndSettle();
       await tester.pumpWidget(const SizedBox.shrink());
       await tester.pumpAndSettle();
       await tester.pumpWidget(const UserScreen());
@@ -85,7 +103,12 @@ void main() {
       await tester.scrollUntilVisible(
         find.text(note),
         200,
-        scrollable: find.byType(Scrollable).last,
+        scrollable: find
+            .descendant(
+              of: find.byType(TabletView),
+              matching: find.byType(Scrollable),
+            )
+            .first,
       );
       expect(find.text(note), findsOneWidget);
       expect(tester.takeException(), isNull);

@@ -1,31 +1,39 @@
-APP NAME (max 30)
-Soft Margin
+APP NAME: Tideframe
+BUNDLE ID: com.app.tideframe.build
+SUBTITLE: Find your offline rhythm
+COPYRIGHT: 2026 Tideframe
 
-SUBTITLE (max 30)
-A private offline teacher
+KEYWORDS
+offline,teacher,breathing,journal,attention,movement,rest,meditation,private,practice,relax
 
-KEYWORDS (max 100)
-offline,journal,breath,meditation,rest,movement,attention,stretch,reflection,relax,practice
-
-PROMOTIONAL TEXT (max 170)
-Leave a little space for yourself. Guided practice, four rising breath columns and personal pages — fully offline. No account. No cloud.
+PROMOTIONAL TEXT
+Find your own rhythm. Ten guided practices, rising breath columns and a private collection of moments. Fully offline. No account. No cloud.
 
 DESCRIPTION
-Soft Margin is a complete offline teacher for comfortable movement, attention, breathing and rest. A warm-paper notebook with ten original guided practices, five short lessons and three breathing patterns. All teaching is included on your device. No account, no login, no cloud sync and no remote AI.
+Tideframe is a complete offline teacher for comfortable movement, attention, breathing and rest. Ten original guided practices, five short lessons and three breathing rhythms are included on your device. No account, no login, no cloud sync and no remote AI.
 
-YOUR DAILY PAGE
-Complete onboarding by choosing Settle, Open, Notice or Rest, a practice window of 8, 12 or 18 minutes, and a comfortable pace. Walk offers a three-part path: make space with a guided session, follow an easy breathing rhythm, then leave a note in Tablet. Recommendations use your preferences, time of day and recent practice.
+YOUR PRACTICE DASHBOARD
+Choose Reset, Mobilize, Focus or Unwind during onboarding, then set an 8, 12 or 18 minute window and a comfortable pace. Walk puts your recommended practice beside quick access to Four columns and Tablet, with locally stored practice-day and weekly-minute totals.
 
-TEN GUIDED PRACTICES
-Explore The weight of palms, Room around the jaw, Small shoulder arcs, The chair hinge, A quiet turn, Edge and centre, Patient breath and The unwritten page. Each practice has written teaching, four timed steps, pause and next-step controls. Rest offers Three enoughs and Resting layers for an unhurried evening.
-
-RANGE: THE CONTENTS
-Search practices and short lessons by name or description. Filter practices by category, or switch to Short lessons to study setup, breathing and a comfortable alternative. Choose your own lesson whenever you prefer.
+FOLLOW A GUIDED WALK
+Explore Sound compass, Near and far, Heel and toe, Hand fan, Side space, Grounded reach, Breath landmarks and One thing at a time. Each session has four written, timed steps, a circular countdown, pause and next-step controls. Save a feeling when you finish. Rest offers Evening inventory and Quiet horizon in a dimmed player.
 
 FOUR COLUMNS
-Four rising columns guide inhale, pause, exhale and pause. Open margin and Even lines offer patterns without holds. Read the method, start or pause, and follow the phase countdown and round number. Keep the breath comfortable and return to ordinary breathing whenever you need.
+Four rising columns guide inhale, pause, exhale and pause. Phase labels, countdown and round progress keep the rhythm clear. Easy current and Level tide are alternatives without breath holds. Keep the breath comfortable; pause or stop whenever you need.
 
-TABLET: PERSONAL PAGES
-Choose a reflection prompt and mood, write a note and tap Save note. Your dated pages show the original prompt and your words. Notes, preferences and practice history are stored locally and remain available after reopening the app. Private journal — fully offline. No account. No cloud.
+EXPLORE RANGE
+Search and filter the practice collection, or switch to Short lessons. Learn a setup, an ordinary breathing cue and a comfortable alternative. The collection adapts to one or two columns according to available space.
 
-Choose Warm paper or Evening ink appearance, or match your device. Your next page is always available without a network connection.
+CAPTURE A MOMENT IN TABLET
+Tap New note to open a separate writing panel. Choose a prompt and feeling, write your observation and save it locally. Browse dated note cards, revisit the original prompt or filter by feeling. Notes remain available after reopening. Private journal — fully offline. No account. No cloud.
+
+Choose Day current, Night current or your device appearance. All teaching, preferences, practice history and journal functions work without a network connection.
+
+REVIEW NOTES
+Tideframe is a complete offline teacher. Complete four onboarding steps and tap Start my Walk. On Walk tap Walk this session, then Start session. Pause or use Next step; Finish practice and choose a feeling to save locally. Open the Four columns quick tile and tap Start breathing to view rising columns, phase countdown and four rounds; Pause breathing stops the timer. Use the top destination strip to open Range, search or filter practices, or switch to Short lessons and open one. Rest offers Evening inventory and Quiet horizon. Open Tablet from the top strip or Write in Tablet on Walk, tap New note, choose a prompt and feeling, enter text and tap Save note. The dated card appears in Tablet and persists after reopening. Filter saved notes by feeling. No account, login, cloud sync or remote AI; no credentials required. All teaching and journal functions work offline.
+
+SUPPORT URL
+https://docs.google.com/forms/d/1KYiuHxGr6jEcoqwKpzpLSf7kco0yoS0gqAXPwccTXxk/viewform
+
+PRIVACY POLICY URL
+https://freeprivacyone.netdummy.org/SOFT_MARGIN_privacy.html

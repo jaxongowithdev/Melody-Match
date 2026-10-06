@@ -1,6 +1,6 @@
-/// Ember Atlas — an offline movement, breath, rest, and private journal teacher.
+/// Melody Match — a musical pair-matching game.
 library;
 
-export 'src/screens/user_screen.dart';
+export 'main.dart' show UserScreen, MelodyMatchScreen;
 export 'src/utils/visual_theme.dart';
 export 'src/widgets/stoa_chrome.dart';

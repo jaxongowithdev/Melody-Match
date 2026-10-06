@@ -2,125 +2,82 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:user_screen/user_screen.dart';
-import 'package:user_screen/src/database/storage_manager.dart';
-import 'package:user_screen/src/models/user_preferences.dart';
-import 'package:user_screen/src/screens/session_player_view.dart';
-import 'package:user_screen/src/screens/breath_view.dart';
-import 'package:user_screen/src/screens/tablet_view.dart';
+import 'package:user_screen/src/melody/progress.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets(
-    'Ember Atlas offline onboarding, Walk, breathing, Range and persistent Tablet',
-    (tester) async {
-      final storage = StorageManager.instance;
-      await storage.savePreferences(UserPreferences());
-      Future<void> waitFor(Finder finder) async {
-        for (var i = 0; i < 100 && finder.evaluate().isEmpty; i++) {
-          await tester.pump(const Duration(milliseconds: 100));
-        }
-        expect(finder, findsWidgets);
-        await tester.pumpAndSettle();
+  testWidgets('Melody Match native navigation, purchase and SQLite restore', (
+    tester,
+  ) async {
+    final store = LocalProgressStore(
+      filename: 'melody_match_integration_test.db',
+    );
+    final progress = MelodyProgress(store: store);
+    await progress.load();
+    await progress.reset();
+    await tester.pumpWidget(UserScreen(progress: progress));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('PLAY LEVEL 1'));
+    await tester.pumpAndSettle();
+    for (final pair in [
+      [0, 2],
+      [1, 6],
+      [3, 4],
+      [5, 9],
+      [7, 10],
+      [8, 14],
+      [11, 13],
+      [12, 15],
+    ]) {
+      for (final index in pair) {
+        await tester.tap(find.byKey(ValueKey('tile-$index')));
       }
-
-      await tester.pumpWidget(const UserScreen());
-      await waitFor(find.text('Continue'));
-      for (var i = 0; i < 3; i++) {
-        await tester.tap(find.text('Continue'));
-        await tester.pumpAndSettle();
-      }
-      await tester.tap(find.text('Start my Walk'));
-      await waitFor(find.text('Walk this session'));
-      await tester.ensureVisible(find.text('Walk this session'));
-      await tester.tap(find.text('Walk this session'));
-      await tester.pumpAndSettle();
-      expect(find.byType(SessionPlayerView), findsOneWidget);
-      await tester.tap(find.text('Start session'));
-      await tester.pump(const Duration(seconds: 2));
-      await tester.tap(find.text('Pause session'));
-      await tester.pumpAndSettle();
-      for (var i = 0; i < 3; i++) {
-        await tester.ensureVisible(find.text('Next step'));
-        await tester.tap(find.text('Next step'));
-        await tester.pumpAndSettle();
-      }
-      await tester.ensureVisible(find.text('Finish practice'));
-      await tester.tap(find.text('Finish practice'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('grounded'));
-      await waitFor(find.text('Walk this session'));
-      expect((await storage.recentLogs()).isNotEmpty, isTrue);
-      await tester.scrollUntilVisible(
-        find.text('Four columns'),
-        200,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.tap(find.text('Four columns'));
-      await tester.pumpAndSettle();
-      expect(find.byType(BreathView), findsOneWidget);
-      await tester.tap(find.text('Start breathing'));
-      await tester.pump(const Duration(seconds: 2));
-      await tester.tap(find.text('Pause breathing'));
-      await tester.pumpAndSettle();
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-      await tester.tap(find.byTooltip('Open navigation menu'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Range'));
-      await tester.pumpAndSettle();
-      expect(find.text('The route index.'), findsOneWidget);
-      await tester.tap(find.byTooltip('Open navigation menu'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Tablet'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('New note'));
-      await tester.pumpAndSettle();
-      expect(
-        tester
-            .widget<FilledButton>(
-              find.widgetWithText(FilledButton, 'Save note'),
-            )
-            .onPressed,
-        isNull,
-      );
-      await tester.tap(find.text('Another prompt'));
-      await tester.ensureVisible(find.text('clear'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('clear'));
-      final note =
-          'Ember Atlas offline observation ${DateTime.now().millisecondsSinceEpoch}';
-      await tester.enterText(find.byType(TextField), note);
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(find.text('Save note'));
-      await tester.tap(find.text('Save note'));
-      await waitFor(find.text('Note saved on this device.'));
-      expect((await storage.allJournal()).any((e) => e.body == note), isTrue);
-      await tester.enterText(find.byType(TextField), 'no-matching-trace');
-      await tester.pumpAndSettle();
-      expect(find.text(note), findsNothing);
-      expect(find.text('No notes match this search.'), findsOneWidget);
-      await tester.enterText(find.byType(TextField), '');
-      await tester.pumpAndSettle();
-      await tester.pumpWidget(const SizedBox.shrink());
-      await tester.pumpAndSettle();
-      await tester.pumpWidget(const UserScreen());
-      await waitFor(find.text('Walk this session'));
-      await tester.tap(find.byTooltip('Open navigation menu'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Tablet'));
-      await tester.pumpAndSettle();
-      await tester.scrollUntilVisible(
-        find.text(note),
-        200,
-        scrollable: find
-            .descendant(
-              of: find.byType(TabletView),
-              matching: find.byType(Scrollable),
-            )
-            .first,
-      );
-      expect(find.text(note), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    },
-  );
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(find.text('BRAVO!'), findsOneWidget);
+    expect(progress.unlocked, 2);
+    await tester.tap(find.byTooltip('Back to home'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Quests'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('CLAIM REWARD').first);
+    await tester.pumpAndSettle();
+    expect(progress.claimed, contains('first'));
+    await tester.tap(find.text('Shop'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('BUY · 75 🪙'));
+    await tester.pumpAndSettle();
+    expect(progress.boosters['hint'], 6);
+    await tester.tap(find.byTooltip('Settings'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(Switch));
+    await tester.pumpAndSettle();
+    expect(progress.sound, isFalse);
+    await progress.flush();
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
+    final restored = MelodyProgress(
+      store: LocalProgressStore(filename: 'melody_match_integration_test.db'),
+    );
+    await restored.load();
+    expect(restored.error, isNull);
+    expect(restored.unlocked, 2);
+    expect(restored.collection.length, 8);
+    expect(restored.coins, progress.coins);
+    expect(restored.sound, isFalse);
+    expect(restored.claimed, contains('first'));
+    await tester.pumpWidget(UserScreen(progress: restored));
+    await tester.pumpAndSettle();
+    expect(find.text('PLAY LEVEL 2'), findsOneWidget);
+    await tester.tap(find.text('Collection'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Violin'));
+    await tester.pumpAndSettle();
+    expect(find.text('Discovered · 1 pair collected'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Home'));
+    await tester.pumpAndSettle();
+  });
 }

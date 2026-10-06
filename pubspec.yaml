@@ -1,6 +1,6 @@
 name: user_screen
-description: "Ember Atlas - A complete offline teacher for movement, attention, breathing, rest and private notes."
-version: 1.9.0+1
+description: "Melody Match - Offline musical puzzles, daily challenges and an instrument collection."
+version: 2.0.0+2
 
 environment:
   sdk: '>=3.4.0 <4.0.0'

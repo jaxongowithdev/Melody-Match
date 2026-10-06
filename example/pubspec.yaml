@@ -1,7 +1,7 @@
 name: ember_atlas_example
-description: "Ember Atlas - Private offline movement and rest teacher"
+description: "Melody Match - Offline musical puzzles, daily challenges and an instrument collection."
 publish_to: 'none'
-version: 1.9.0+1
+version: 2.0.0+2
 environment:
   sdk: ^3.8.0
 
